@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<!--사용자 스크립트 추가-->
+
+<!-- Slick Carousel 및 DateRangePicker 관련 CSS 및 JavaScript -->
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+</head>
+
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function() {
+
+           // Slick Carousel 초기화
+           $('.slider').slick({
+             slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+              prevArrow: '<button type="button" class="slick-prev">〈</button>',
+                nextArrow: '<button type="button" class="slick-next">〉</button>'
+           });
+
+       });
+
+
+       function deleteItemList(Id){
+           var cartItemId = Id.dataset.id;
+           var token =$("meta[name='_csrf']").attr("content");
+           var header =$("meta[name='_csrf_header']").attr("content");
+
+           var url = "/cart/"+ cartItemId + "/delete";
+
+           $.ajax({
+               url : url,
+               type : "DELETE",
+
+               beforeSend : function(xhr){
+                   /*데이터 전송하기 전에 헤더에 csrf 값 설정*/
+                   xhr.setRequestHeader(header, token);
+               },
+               dataType : "json",
+               cache : false,
+               success : function(result, status){
+                  location.href='/cart';
+               },
+              error : function(jqXHR, status, error){
+                   if(jqXHR.status == '401'){
+                       alert('로그인 후 이용해주세요.');
+                       location.href = '/members/login';
+                   }else{
+                       alert(jqXHR.responseText);
+                   }
+              }
+
+           });
+
+
+       }
+
+
+        function order() {
+              var token = $("meta[name='_csrf']").attr("content");
+              var header = $("meta[name='_csrf_header']").attr("content");
+              var cartId= $("#cartId").text()
+              var count = $("#cartCount").text()
+
+              var url = "/cart/" + cartId + "/order";
+              var paramData = {
+                    cartId: cartId,
+                    count: count
+              }
+              var param = JSON.stringify(paramData);
+
+              $.ajax({
+                    url: url,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: param,
+                    beforeSend: function (xhr) {
+                        console.log("3")
+                          // 데이터 전송하기 전에 헤더에 csrf 값을 설정
+                          xhr.setRequestHeader(header, token);
+                    },
+                    dataType: "json",
+                    cache: false,
+                    success: function (result, status) {
+                           console.log("4")
+                          alert("결제를 진행합니다..");
+                            location.href = '/payment/' + result;
+                    },
+                    error : function(jqXHR, status, error){
+                        console.log("5")
+                          if(jqXHR.status == '401'){
+                                alert('로그인 후 이용해주세요');
+                                location.href='/members/login';
+                          }else{
+                                alert(jqXHR.responseText);
+                          }
+                    }
+              });
+        }
+
+
+
+
+    </script>
+</th:block>
+
+<th:block layout:fragment="css">
+    <style>
+
+        body {
+               font-family: Arial, sans-serif;
+               background-color: #ffff;
+               margin: 0;
+               padding: 0;
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+
+           }
+
+        header {
+                width: 100%;
+                background-color: #ffff;
+
+            }
+     main {
+
+                top: 30.2%; /* 이동 */
+                max-width: 800px;
+                left:23%;
+
+                background:  #ffffff;
+                margin: 2em;
+                padding:28px;
+            }
+.all1{
+position: ; /* 마이페이지 제목부터 리스트까지 통으로 움직임 */
+   margin-top:-60px;
+}
+            .mp{/* 리스트만 통으로 움직임 */
+             top:-10px;
+           margin-left:-290px;
+             margin-top: 25px;
+            }
+     h3{/* 마이페이지 제목*/
+     margin-left:-256px;
+     }
+
+     .hh4{
+position:absolute ;
+     margin-left:-80px;
+     margin-top: -520px;
+     }
+
+.hrline{
+width:130px;
+   margin: 15px 0; /* 가로선의 위아래 여백을 설정 */
+ border: none; /* 기본 선 제거 */
+ border-top: 2px solid 	#1c4587; /* 원하는 두께와 색상 설정 */
+}
+.hrline2{
+width:130px;
+   margin: 15px 0; /* 가로선의 위아래 여백을 설정 */
+border: none; /* 기본 선 제거 */
+ border-top: 1.5px solid #03619B; /* 원하는 두께와 색상 설정 */
+}
+            ul{
+             list-style-type: none;
+            }
+            .tx{
+            text-decoration: none;
+            font-size:15px;
+            color:	#434343;
+            }
+
+              table{
+
+            text-align: center;
+        position: relative;
+            padding: 10px;
+          border-top: 1px solid 		#696969;
+          border-bottom: 1px solid 		#d9d9d9;
+              color: #333;
+                  background-color:	#f7f7f7;
+                  letter-spacing: 2px;
+        font-size: 15px;
+        font-weight: 600;
+         width: 1200px;
+         left:-80px;
+         top:-462px;
+
+            cursor: pointer;
+
+            }
+
+           tr{
+      line-height:50px;
+        letter-spacing: 0px;
+        }
+
+      .cc{
+      position: fixed; /* 고정 */
+      height: 300px; /* 이동 */
+      width: 1200px;
+      margin-left: -450px;
+      margin-top:130px;
+        margin-left:-20px;
+        border-bottom: 1px solid 	#696969;
+        }
+        th{
+         border-bottom: 1px solid 		#d9d9d9;
+        }
+        td{
+        background-color:#ffffff;
+        }
+
+        .reservation-btn{/* 예약버튼 */
+        font-size:13px;
+position: absolute;
+margin-left:-33px;
+margin-top:-17px;
+         color: #666666;
+               border: 1px solid #d9d9d9;
+               border-radius: 5px;
+               cursor: pointer;
+                background-color:#ffffff;
+                width:70px;
+               line-height: 30px; /* 버튼의 높이와 같게 맞춤 */
+        }
+        .delete-btn{/* 취소버튼 */
+         font-size:13px;
+position: absolute;
+margin-left:-33px;
+margin-top:-17px;
+         color: 	#cc4125;
+               border: 1px solid 		#e06666;
+               border-radius: 5px;
+               cursor: pointer;
+                background-color:#ffffff;
+                width:70px;
+               line-height: 30px; /* 버튼의 높이와 같게 맞춤 */
+        }
+
+
+        .travelslider{/* 슬라이더 전체 크기조정 */
+   position: absolute;
+        margin-top:-300px;
+        margin-left:33px;
+        height:5000px;
+width:1000px;
+
+        }
+
+      .travelslider h3{/* 취향에 맞는 여행을 추천 */
+           margin-left:240px;
+           padding:20px;
+        }
+
+        .sliderDiv{/* 사진 사이 간격 조정 */
+padding-left:10px;
+padding-right:10px;
+
+        }
+               .slick-prev{
+                   font-family: "Font Awesome Free 5";
+    font-weight: 900; /* 아이콘 두껍게 설정 */
+    content: "\f053"; /* Font Awesome에서의 이전 화살표 아이콘 코드 */
+            position: absolute;
+            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+            margin-left:-20px;
+            margin-top:90px;
+    z-index: 1; /* 다른 콘텐츠 위에 표시하기 위해 z-index 설정 */
+    background-color: #ffffff; /* 배경색 */
+    color: black; /* 버튼 글자색 */
+    border: none;
+    border-radius: 50%; /* 동그란 형태  */
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+
+        }
+
+
+        .slick-next{
+           font-family: "Font Awesome Free 5";
+    font-weight: 900; /* 아이콘 두껍게 설정 */
+    content: "\f054"; /* Font Awesome에서의 다음 화살표 아이콘 코드 */
+
+         position: absolute;
+            margin-left:980px;
+            margin-top:-130px;
+    z-index: 1; /* 다른 콘텐츠 위에 표시하기 위해 z-index 설정 */
+    background-color: #ffffff; /* 배경색 */
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    color: black;
+    border: none;
+    border-radius: 50%; /* 동그란 형태  */
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+        }
+
+
+    </style>
+</th:block>
+
+<div layout:fragment="content">
+    <body>
+    <main>
+
+        <div class="all1">
+            <h3><strong>마이페이지</strong></h3>
+
+            <div class="mp">
+
+                <ul>
+
+                    <hr class="hrline">
+                    <li><a class="tx" href="/orders">예약내역</a></li>
+                    <hr class="hrline2">
+                    <li><a class="tx" href="/cart">찜</a></li>
+                    <hr class="hrline2">
+                    <li><a class="tx" href="/mileage">마일리지</a></li>
+                    <hr class="hrline2">
+                    <li><a class="tx">쿠폰함</a></li>
+                    <hr class="hrline2">
+                    <li><a class="tx" href="/userQuestion">1:1문의</a></li>
+                    <hr class="hrline2">
+                    <li><a class="tx" href="/qna">자주 찾는 질문</a></li>
+                    <hr class="hrline2">
+                    <li><a class="tx">My 여행 후기</a></li>
+                    <hr class="hrline2">
+                    <li><a class="tx" href="/updateInfo">개인정보 수정</a></li>
+                    <hr class="hrline">
+                </ul>
+            </div>
+        </div>
+
+
+        <div>
+            <h4 class="hh4">찜</h4>
+        </div>
+
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>주문번호</th>
+                    <th>상품명</th>
+                    <th>여행 날짜</th>
+                    <th>인원</th>
+                    <th>가격</th>
+                    <th>예약</th>
+                    <th>삭제</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <div class="cc">
+                    <tr th:each="cart : ${cartDetailItem}">
+                        <td th:text="${cart.id}" id="cartId"></td><!-- id 번호 -->
+                        <td th:text="${cart.itemNm}" id="cartItemNm"></td><!-- 상품명 -->
+                        <td th:text="${cart.startDate}" id=" cartStartDate"></td><!-- 출발일 -->
+                        <td th:text="${cart.count}" id="cartCount"></td><!-- 인원 -->
+                        <td th:text="${cart.price * cart.count}" id="cartTotal"></td><!-- 총가격 -->
+                        <td>
+                            <button class="reservation-btn" onclick="order()" th:data-id="${cart.id}" type="button">예약
+                            </button>
+                        </td>
+                        <td>
+                            <button class="delete-btn" onclick="deleteItemList(this)" th:data-id="${cart.id}"
+                                    type="button">삭제
+                            </button>
+                        </td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="travelslider">
+            <h3>
+                <svg class="bi bi-heart-fill" fill="currentColor" height="20" viewBox="0 0 16 16"
+                     width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
+                          fill-rule="evenodd"/>
+                </svg>
+                취향에 맞는 여행을 추천해드렸어요
+                <svg class="bi bi-heart-fill" fill="currentColor" height="20" viewBox="0 0 16 16"
+                     width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
+                          fill-rule="evenodd"/>
+                </svg>
+            </h3>
+            <div class="slider">
+                <div class="sliderDiv">
+                    <img class="img-fluid" th:src="@{/css/images/jeju_1.jpg}">
+                </div>
+                <div class="sliderDiv">
+                    <img class="img-fluid" th:src="@{/css/images/jeju_2.jpg}">
+                </div>
+                <div class="sliderDiv">
+                    <img class="img-fluid" th:src="@{/css/images/jeju_3.jpg}">
+                </div>
+                <div class="sliderDiv">
+                    <img class="img-fluid" th:src="@{/css/images/jeju_4.jpg}">
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+    </body>
+
+</div>
+
+</html>
