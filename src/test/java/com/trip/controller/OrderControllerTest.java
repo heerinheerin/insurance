@@ -1,6 +1,6 @@
 package com.trip.controller;
 
-import com.trip.constant.OrderStatus;
+import com.trip.OrderStatus;
 import com.trip.dto.MemberFormDto;
 import com.trip.dto.OrderDto;
 import com.trip.entity.Member;

@@ -36,24 +36,30 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 str= Category.SEOUL;
             }else if (category.equals("대전")) {
                 str=Category.DAEJEON;
-            }else if (category.equals("양양")) {
-                str=Category.YANGYANG;
+            }else if (category.equals("경기")) {
+                str=Category.GYEONGGI;
             }else if (category.equals("부산")) {
                 str= Category.BUSAN;
             }else if (category.equals("제주도")) {
                 str = Category.JEJU;
-            }else if (category.equals("미국")) {
-                str = Category.USA;
-            } else if (category.equals("필리핀")) {
-                str = Category.PHILIPPINES;
-            } else if (category.equals("베트남")) {
-                str = Category.NHA_TRANG;
-            } else if (category.equals("코타키나발루")) {
-                str = Category.KOTA_KINABALU;
-            } else if (category.equals("일본")) {
-                str=Category.JAPAN;
-            } else if (category.equals("하와이")) {
-                str = Category.HAWAII;
+            }else if (category.equals("강원")) {
+                str = Category. GANGWON;
+            } else if (category.equals("광주")) {
+                str = Category.GWANGJU;
+            } else if (category.equals("외식·음료")) {
+                str = Category.FOODSERVICE;
+            } else if (category.equals("매장관리·판매")) {
+                str = Category.SHOPSELL;
+            } else if (category.equals("서비스")) {
+                str = Category.SERVICE;
+            } else if (category.equals("사무직")) {
+                str = Category.OFFICEJOP;
+            } else if (category.equals("IT·개발")) {
+                str = Category.IT;
+            } else if (category.equals("고객상담")) {
+                str = Category.COUNSEL;
+            } else if (category.equals("운전·배달")) {
+                str = Category.DELIVERY;
             } else {
                 str = null;
             }

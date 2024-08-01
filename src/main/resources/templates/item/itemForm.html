@@ -115,7 +115,7 @@
       <span class="input-group-text">지역 선택</span>
       <select id="categorySelect" name="category" th:field="*{category}" class="form-select">
         <!-- Thymeleaf를 이용하여 옵션 동적 생성 -->
-        <option th:each="category : ${T(com.trip.constant.Category).values()}"
+        <option th:each="category : ${T(com.Myproject.insurance.constant.Category).values()}"
                 th:value="${category.name()}"
                 th:text="${category.displayName}"></option>
       </select>

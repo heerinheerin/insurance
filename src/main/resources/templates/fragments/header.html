@@ -1,254 +1,256 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <header th:fragment="header">
 
     <head>
+        <meta name="_csrf" th:content="${_csrf.token}" />
+        <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-                            .aa {
-  font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                                display: flex;
-                                height: 80px;
-                                background-color: #ffffff;
-                                 margin-top: 30px;
-                            }
 
-                               .bb {
-                                display: flex;
-                                height: 80px;
-                                background-color: #ffffff;
-                                border-bottom: 1px solid #cccccc;
-                                margin-top: 10px;
-                            }
+            body {
+                font-family: "Noto Sans KR", sans-serif;
+                overflow: auto;
+                position: relative;
+                padding-top: 0;
+                box-sizing: border-box;
+            }
 
-                            .dropdown {
+            .header {
+                z-index: 10;
+                background-color: rgb(255 255 255 / 70%);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 1px 30px rgba(240, 237, 233, 0.596);
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 180px;
+                border-bottom: 1px solid #eeeeee;
+                font-weight: bold;
+                flex-direction: column; /* 수직 배치 */
+                align-items: center;
+            }
 
+            /* ======================== 로고 애니메이션 ======================== */
+            @keyframes sparkle {
+                0%, 100% {
+                    opacity: 1; /* 처음과 끝에서 완전 불투명 */
+                }
+                50% {
+                    opacity: 0.5; /* 중간에서 반투명 */
+                }
+            }
 
-                  display: absolute;
-                  top:45px;
-                               left:1037px;
-                            }
+            .logo1, .logo2, .logo3, .logo4 {
+                position: fixed;
 
+            }
 
-                            .nav { /* 로그인 */
-  font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+            .logo1 {
+             z-index: 100000;
+                margin-top: 45px;
+                margin-left: 350px;
+                animation: slide-up 0.5s ease forwards; /* 애니메이션 적용 */
+            }
 
-                            color: #0b5394;
-                                list-style-type: none;
-                             margin-top: -42px;
-                               margin-left: 1633px;
-                            }
+            .logo2 {
+             z-index: 100000;
+                margin-top: 45px;
+                margin-left: 355px;
+                animation: slide-up 0.9s ease forwards; /* 애니메이션 적용 */
+            }
 
-                            .logo {
-                                margin-left: 300px;
-                                margin-top: 5px;
-                            }
-                             .nav2 {/* 모든 메뉴 */
-  font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                                display: flex;
-                                list-style-type: none;
-                                margin-top: 30px;
-                                 margin-left: 270px;
-                            }
-                            .nav2 img{/* 모든 메뉴 */
-                            margin-top: -6px; /* 이미지 위 아래 위치*/
+            .logo3 {
+             z-index: 9999;
+                margin-top: 39px;
+                margin-left: 338px;
+                animation: sparkle 1.5s ease-in-out forwards; /* 애니메이션 적용 후 상태 유지 */
+                animation-iteration-count: 2; /* 애니메이션 반복 횟수 */
+            }
 
-                             margin-right: -15px;
-                             margin-left: 8px;}
+            .logo4 {
+             z-index: 100000;
+                margin-top: 42px;
+                margin-left: 350px;
+                animation: sparkle 1.5s ease-in-out forwards; /* 애니메이션 적용 후 상태 유지 */
+                animation-iteration-count: 2; /* 애니메이션 반복 횟수 */
+            }
 
-                              .nav3 { /* 국내 여행 */
-  font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                                display: flex;
-                                list-style-type: none;
-                                margin-top: 30px;
-                               margin-left: -30px;
-                            }
-                             .nav3 img{ /* 국내 여행 */
-                            margin-top: -20px; /* 이미지 위 아래 위치*/
+            @keyframes slide-up {
+                0% {
+                    transform: translateY(50px); /* 시작 위치: 아래 */
+                    opacity: 0; /* 투명도: 0 */
+                }
+                100% {
+                    transform: translateY(0); /* 최종 위치: 원래 위치 */
+                    opacity: 1; /* 투명도: 1 */
+                }
+            }
 
-                             margin-right: -22px;
-                             margin-left: 9px;}
+            .dropdown {
+                z-index: 100000;
+                position: fixed;
+                display: flex;
+                margin-top: 68px;
+                margin-left: 1450px;
+            }
 
+            .nav {
+                z-index: 100000;
+                position: fixed;
+                display: flex;
+                margin-left: 1450px;
+            }
 
-                  .nav4 { /* 해외 여행 */
-  font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                  display: flex;
-                                list-style-type: none;
-                                margin-top: 30px;
-                               margin-left: -30px;
-                  }
-                  .nav4 img{ /* 해외 여행 */
-                   margin-top: -15px;/* 이미지 위 아래 위치*/
+            .bb {
+                z-index: 100000;
+                position: fixed;
+                display: flex;
+                margin-top: 140px;
+                margin-left: 500px;
+            }
 
-                             margin-right: -15px;
-                             margin-left: 15px;}
-                  }
+            li {
+                z-index: 100000;
+                list-style-type: none;
+            }
 
-                              .nav5{
-   font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                               display: flex;
-                                list-style-type: none;
-                                margin-top: 100px;
-                               margin-left: 10px;
-                              }
+            .nav7 {
+                z-index: 100000;
+                display: flex;
+            }
 
-                  .nav5 img{
-                   margin-top: 20px;/* 이미지 위 아래 위치*/
-                             margin-right: -30px;
-                             margin-left: -17px;}
-                  .nav6{
-  font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                   display: flex;
-                                list-style-type: none;
-                                 margin-top: 30px;
-                               margin-left: 4px;
-                              }
+            @media (max-width: 1400px) {
+                .logo {
+                    z-index: 100000;
+                    margin-left: 50px; /* 로고를 좀 더 왼쪽으로 이동 */
+                }
 
-                              .nav7{
-  font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                               display: flex;
-                                list-style-type: none;
-                                margin-top: 30px;
-                               margin-left: 6px;
-                              }
-                              .nav8{ /* 반갑습니다 */
-                                  font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                               display: flex;
-                                list-style-type: none;
-                                margin-top: 20px;
-                               margin-left: 190px;
-                              }
-                          .nav9{ /* 로그아웃 */
-                              font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                               color: #0b5394;
-                                list-style-type: none;
-                                margin-top: -44px;
-                               margin-left: -100px;
-                              }
-
-                               .nav10{
-                                   font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-                               display: flex;
-                                list-style-type: none;
-                                margin-top: 30px;
-                               margin-left: 4px;
-                              }
-
-
-
-
+                .dropdown {
+                    z-index: 100000;
+                    margin-left: 300px; /* 드롭다운 메뉴도 왼쪽으로 이동 */
+                }
+            }
         </style>
     </head>
     <body>
+    <div class="header">
+    </div>
 
-    <div class="aa">
-        <a class="logo" href="/">
-            <img th:src="@{/css/images/logo.png}" height="80">
-        </a>
+    <a class="logo1" href="/">
+        <img th:src="@{/css/images/logo1.png}" height="60">
+    </a>
+    <a class="logo2" href="/">
+        <img th:src="@{/css/images/logo2.png}" height="60">
+    </a>
+    <a class="logo3" href="/">
+        <img th:src="@{/css/images/logo3.png}" height="68">
+    </a>
+    <a class="logo4" href="/">
+        <img th:src="@{/css/images/logo4.png}" height="59">
+    </a>
 
+    <div class="dropdown">
+        <button class="btn btn-link dropdown-toggle nav-link px-2" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"><a>마이페이지</a>
+        </button>
 
-        <div class="dropdown">
-            <button class="btn btn-link dropdown-toggle nav-link px-2" type="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                마이페이지
-            </button>
+        <p sec:authorize="isAuthenticated()" id="result"></p>
+        <input type="hidden" id="username" sec:authorize="isAuthenticated()" th:value="${#authentication.name}">
 
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/orders">예약 내역</a></li>
-                <li><a class="dropdown-item" href="/cart">찜 내역</a></li>
-                <li><a class="dropdown-item" href="/userQuestion">1:1문의</a></li>
-                <li><a class="dropdown-item" href="/mypage">마이페이지</a></li>
-            </ul>
-        </div>
-
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/orders">이력서 관리</a></li>
+            <li><a class="dropdown-item" href="/cart">관심 공고</a></li>
+            <li><a class="dropdown-item" href="/userQuestion">고객센터</a></li>
+            <li><a class="dropdown-item" href="/mypage">회원 정보</a></li>
+        </ul>
     </div>
     <ul class="nav" sec:authorize="isAnonymous()">
         <li><a href="/members/login" class="nav-link">로그인</a></li>
     </ul>
 
-
-    <!-- 이동된 부분 -->
     <div class="bb">
-    <ul class="nav2">
-        <li><img th:src="@{/css/images/allmenu.png}" height="37"></li>
-        <li><a href="#" class="nav-link px-2 link-secondary">모든메뉴</a></li>
-    </ul>
+        <ul class="nav2">
+            <li><a href="#" class="nav-link px-2 link-secondary">채용정보</a></li>
+        </ul>
 
         <ul class="nav3">
-        <li><img th:src="@{/css/images/korea.png}" height="70"></li>
-        <li><a href="/domestic" class="nav-link px-2 link-secondary">국내 여행</a></li>
-    </ul>
-
+            <li><a href="/domestic" class="nav-link px-2 link-secondary">인재정보</a></li>
+        </ul>
         <ul class="nav4">
-        <li><img th:src="@{/css/images/travel.png}" height="60"></li>
-        <li><a href="/overseas" class="nav-link px-2 link-secondary">해외 여행</a></li>
-    </ul>
-        <ul class="nav5">
-            <img th:src="@{/css/images/menuline.png}" height="50"></svg>
+            <li><a href="/qna" class="nav-link px-2 link-secondary">커뮤니티</a></li>
         </ul>
 
         <ul class="nav6">
-            <li><a href="#" class="nav-link px-2 link-secondary">이벤트</a></li>
+            <li><a href="/event" class="nav-link px-2 link-secondary">이벤트</a></li>
         </ul>
 
-        <ul class="nav10">
-            <li><a href="/qna" class="nav-link px-2 link-secondary">Q&A</a></li>
+        <ul class="nav5">
+            <li><a href="#" class="nav-link px-2 link-secondary">공지사항</a></li>
         </ul>
 
-        <ul class="nav10">
-            <li><a href="/api/list" class="nav-link px-2 link-secondary">환율 계산</a></li>
-        </ul>
-
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" viewBox="0 0 16 16">
+            <g transform="rotate(90 8 8)"> <!-- 90도 회전, 회전 중심 (8, 8) -->
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+            </g>
+        </svg>
 
         <ul class="nav7">
-             <li><a href="/admin/item/new" class="nav-link px-2 link-secondary">패키지 작성</a></li>
-             <li><a href="#" class="nav-link px-2 link-secondary">공지사항 작성</a></li>
-         </ul>
+            <li><a href="/admin/item/new" class="nav-link px-2 link-secondary">이벤트 작성</a></li>
+            <li><a href="#" class="nav-link px-2 link-secondary">공지사항 작성</a></li>
+        </ul>
 
-
-
-
-
-         <ul class="nav9" sec:authorize = "isAuthenticated()">
-             <a class="nav-link" href="/members/logout">로그아웃</a>
-         </ul>
-
-
+        <ul class="nav9" sec:authorize="isAuthenticated()">
+            <a class="nav-link" href="/members/logout">로그아웃</a>
+        </ul>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            var username = $("#username").val(); // 사용자 이름을 숨은 필드에서 가져옴
+
+            var url = "/members/user/" + encodeURIComponent(username); // URL 경로에 사용자 이름 추가
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                beforeSend: function (xhr) {
+                    // CSRF 토큰을 헤더에 추가
+                    xhr.setRequestHeader(header, token);
+                },
+                dataType: "json",
+                cache: false,
+                success: function (result, status) {
+                    console.log(result); // 결과를 콘솔에 출력
+                    document.getElementById('result').textContent = result.name; // 이름 출력
+                }
+            });
+
+            function restartLogos() {
+                // logo1과 logo2의 애니메이션을 초기화하고 다시 적용
+                $('.logo1, .logo2').css('animation', 'none'); // 애니메이션 제거
+                $('.logo1, .logo2').height(); // 리플로우를 트리거하여 애니메이션 초기화
+                $('.logo1').css('animation', 'slide-up 0.5s ease forwards'); // 애니메이션 재적용
+                $('.logo2').css('animation', 'slide-up 0.9s ease forwards'); // 애니메이션 재적용
+            }
+
+            // 초기 애니메이션 시작
+            restartLogos();
+
+            // 애니메이션 후 3초 대기 후 재시작
+            setInterval(function () {
+                setTimeout(restartLogos, 3000); // 3000ms: 3초 대기
+            }, 3500); // 3500ms: 3초 대기 후 애니메이션 재시작
+        });
+    </script>
+
     </body>
 </header>
 </html>

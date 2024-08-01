@@ -109,12 +109,13 @@ public class ItemController {
         model.addAttribute("itemSearchDto",itemSearchDto);
         model.addAttribute("maxPage",5);
         System.out.println(itemSearchDto.getPlaceSearch());
-        if (itemSearchDto.getPlaceSearch().equals("인천")|| itemSearchDto.getPlaceSearch().equals("서울")||
-                itemSearchDto.getPlaceSearch().equals("부산")|| itemSearchDto.getPlaceSearch().equals("양양")||
-                itemSearchDto.getPlaceSearch().equals("대전")|| itemSearchDto.getPlaceSearch().equals("제주도")){
+        if (itemSearchDto.getPlaceSearch().equals("서울")|| itemSearchDto.getPlaceSearch().equals("인천")||
+                itemSearchDto.getPlaceSearch().equals("경기")|| itemSearchDto.getPlaceSearch().equals("강원")||
+                itemSearchDto.getPlaceSearch().equals("대전")|| itemSearchDto.getPlaceSearch().equals("광주")||
+                itemSearchDto.getPlaceSearch().equals("부산")|| itemSearchDto.getPlaceSearch().equals("제주도")){
             //itemsearchDto에서 국내 여행지일 경우 국내 여행 사이트로 연결
             return "nature/domestic";
-//아닐 경우 해외 여행 사이트로 연결
+//아닐 경우 업종
         }else {
             return "nature/overseas";
         }
