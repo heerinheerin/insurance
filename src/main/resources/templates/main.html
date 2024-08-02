@@ -33,6 +33,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden; /* 오버플로우 숨기기 */
         }
 
         .slider__img {
@@ -48,7 +49,7 @@
             height: 450px;
             position: relative;
             left: -800px; /* 첫 번째 슬라이드 위치 */
-            transition: left 1s ease; /* 초기 전환 추가 */
+            transition: left 0.5s ease; /* 부드러운 전환 효과 추가 */
         }
 
         .slider {
@@ -113,30 +114,36 @@
         }
     </style>
 </head>
+<body>
 <div layout:fragment="content">
-    <body>
     <table class="main">
         <div class="main2">
             <div id="sliderType">
                 <div class="slider__wrap">
                     <div class="slider__img">
                         <div class="slider__inner">
-                            <div class="slider s1" role="group" aria-label="1/5">
+                            <div class="slider s1" role="group" aria-label="1/6">
                                 <img th:src="@{/css/images/1.png}">
                             </div>
-                            <div class="slider s2" role="group" aria-label="2/5">
+                            <div class="slider s2" role="group" aria-label="2/6">
                                 <img th:src="@{/css/images/2.png}">
                             </div>
-                            <div class="slider s3" role="group" aria-label="3/5">
+                            <div class="slider s3" role="group" aria-label="3/6">
                                 <img th:src="@{/css/images/3.png}">
                             </div>
-                            <div class="slider s4" role="group" aria-label="4/5">
+                            <div class="slider s4" role="group" aria-label="4/6">
                                 <img th:src="@{/css/images/4.png}">
                             </div>
-                            <div class="slider s5" role="group" aria-label="5/5">
+                            <div class="slider s5" role="group" aria-label="5/6">
                                 <img th:src="@{/css/images/5.png}">
                             </div>
                             <div class="slider s6" role="group" aria-label="6/6">
+                                <img th:src="@{/css/images/6.png}">
+                            </div>
+                            <div class="slider s1-clone" role="group" aria-label="7/6">
+                                <img th:src="@{/css/images/1.png}">
+                            </div>
+                            <div class="slider s6-clone" role="group" aria-label="8/6">
                                 <img th:src="@{/css/images/6.png}">
                             </div>
                         </div>
@@ -152,104 +159,79 @@
 
         <script>
             const sliderWrap = document.querySelector(".slider__wrap");
-            const sliderInner = document.querySelector(".slider__inner");
-            const sliders = document.querySelectorAll(".slider");
-            const sliderBtnPrev = document.querySelector(".slider__btn .prev");
-            const sliderBtnNext = document.querySelector(".slider__btn .next");
+   const sliderInner = document.querySelector(".slider__inner");
+   const sliders = document.querySelectorAll(".slider");
+   const sliderBtnPrev = document.querySelector(".slider__btn .prev");
+   const sliderBtnNext = document.querySelector(".slider__btn .next");
 
-            let currentIndex = 0,
-                sliderLength = sliders.length,
-                sliderWidth = sliders[0].offsetWidth,
-                cloneFirst = sliders[0].cloneNode(true), // 첫 번째 슬라이드 클론
-                cloneLast = sliders[sliderLength - 1].cloneNode(true); // 마지막 슬라이드 클론
+   let currentIndex = 1, // 시작 인덱스를 1로 설정 (클론을 제외한 첫 번째 슬라이드)
+       sliderLength = sliders.length - 2, // 클론을 제외한 슬라이드 개수
+       sliderWidth = sliders[0].offsetWidth;
 
-            let interval = 2000; // 슬라이드 전환 시간
-            let sliderTimer;
+   let interval = 2000; // 슬라이드 전환 시간
+   let sliderTimer;
 
-            function init() {
-                imgClone();
-                gotoSlider(0); // 초기 위치로 이동
-                autoPlay(); // 자동 플레이 시작
-            }
+   function init() {
+       sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 초기 위치 설정
+       autoPlay(); // 자동 플레이 시작
+   }
 
-            function autoPlay() {
-                sliderTimer = setInterval(() => {
-                    gotoSlider(currentIndex + 1);
-                }, interval);
-            }
+   function autoPlay() {
+       sliderTimer = setInterval(() => {
+           gotoSlider(currentIndex + 1);
+       }, interval);
+   }
 
-            function stopPlay() {
-                clearInterval(sliderTimer);
-            }
+   function stopPlay() {
+       clearInterval(sliderTimer);
+   }
 
-            function imgClone() {
-                sliderInner.appendChild(cloneFirst); // 마지막에 첫 번째 클론 추가
-                sliderInner.insertBefore(cloneLast, sliders[0]); // 처음에 마지막 클론 추가
-            }
+   function gotoSlider(index) {
+       if (index > sliderLength) {
+           // 마지막 슬라이드에서 오른쪽으로 넘어가면 클론 첫 번째 슬라이드로 이동
+           sliderInner.style.transition = "none"; // 전환 효과 제거
+           currentIndex = 1; // 첫 번째 슬라이드로 이동
+           sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 위치 초기화
+           requestAnimationFrame(() => {
+               sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
+               currentIndex++; // 다음 인덱스
+               sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 부드럽게 첫 번째 슬라이드로 이동
+           });
+       } else if (index < 0) {
+           // 첫 번째 슬라이드에서 왼쪽으로 넘어가면 클론 마지막 슬라이드로 이동
+           sliderInner.style.transition = "none"; // 전환 효과 제거
+           currentIndex = sliderLength; // 마지막 슬라이드로 이동
+           sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 위치 초기화
+           requestAnimationFrame(() => {
+               sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
+               currentIndex--; // 이전 인덱스
+               sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 부드럽게 마지막 슬라이드로 이동
+           });
+       } else {
+           currentIndex = index; // 현재 인덱스 업데이트
+           sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 위치 조정
+       }
+   }
 
-            function gotoSlider(index) {
-                // 인덱스가 슬라이드 범위를 초과하는 경우
-                if (index > sliderLength) {
-                    sliderInner.style.transition = "none"; // 전환 제거
-                    sliderInner.style.left = -sliderWidth + "px"; // 첫 번째 슬라이드 위치로 이동
-                    currentIndex = 0; // 인덱스 초기화
-                    requestAnimationFrame(() => { // 애니메이션 프레임 요청
-                        sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
-                        sliderInner.style.left = -sliderWidth * (currentIndex + 1) + "px"; // 첫 번째 슬라이드 위치로 이동
-                    });
-                } else if (index < 0) {
-                    sliderInner.style.transition = "none"; // 전환 제거
-                    sliderInner.style.left = -sliderWidth * sliderLength + "px"; // 마지막 슬라이드 위치로 이동
-                    currentIndex = sliderLength - 1; // 인덱스 초기화
-                    requestAnimationFrame(() => { // 애니메이션 프레임 요청
-                        sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
-                        sliderInner.style.left = -sliderWidth * (currentIndex + 1) + "px"; // 마지막 슬라이드 위치로 이동
-                    });
-                } else {
-                    sliderInner.style.transition = "left 0.5s ease"; // 전환 추가
-                    currentIndex = index;
-                    sliderInner.style.left = -sliderWidth * (currentIndex + 1) + "px"; // 위치 조정
-                }
-            }
+   sliderBtnPrev.addEventListener("click", () => {
+       gotoSlider(currentIndex - 1);
+   });
 
-            function checkIndex() {
-                if (currentIndex === sliderLength) {
-                    // 마지막 슬라이드 클론에 도달할 때
-                    sliderInner.style.left = -sliderWidth + "px"; // 첫 번째 슬라이드 위치로 이동
-                    currentIndex = 0; // 인덱스 초기화
-                    requestAnimationFrame(() => { // 애니메이션 프레임 요청
-                        sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
-                        sliderInner.style.left = -sliderWidth * (currentIndex + 1) + "px"; // 첫 번째 슬라이드 위치로 이동
-                    });
-                } else if (currentIndex === -1) {
-                    // 첫 번째 슬라이드 클론에 도달할 때
-                    sliderInner.style.left = -sliderWidth * sliderLength + "px"; // 마지막 슬라이드 위치로 이동
-                    currentIndex = sliderLength - 1; // 인덱스 초기화
-                    requestAnimationFrame(() => { // 애니메이션 프레임 요청
-                        sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
-                        sliderInner.style.left = -sliderWidth * (currentIndex + 1) + "px"; // 마지막 슬라이드 위치로 이동
-                    });
-                }
-            }
+   sliderBtnNext.addEventListener("click", () => {
+       gotoSlider(currentIndex + 1);
+   });
 
-            sliderBtnPrev.addEventListener("click", () => {
-                gotoSlider(currentIndex - 1);
-            });
+   // 슬라이더에 마우스가 올라가면 자동 재생 중지
+   sliderWrap.addEventListener("mouseover", stopPlay);
+   // 슬라이더에서 마우스가 나가면 자동 재생 재개
+   sliderWrap.addEventListener("mouseout", autoPlay);
 
-            sliderBtnNext.addEventListener("click", () => {
-                gotoSlider(currentIndex + 1);
-            });
+   init(); // 초기화 호출
 
-            sliderInner.addEventListener("transitionend", checkIndex);
 
-            // 슬라이더에 마우스가 올라가면 자동 재생 중지
-            sliderWrap.addEventListener("mouseover", stopPlay);
-            // 슬라이더에서 마우스가 나가면 자동 재생 재개
-            sliderWrap.addEventListener("mouseout", autoPlay);
 
-            init(); // 초기화 호출
         </script>
     </table>
-    </body>
 </div>
+</body>
 </html>

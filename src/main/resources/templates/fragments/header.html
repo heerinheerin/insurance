@@ -48,25 +48,24 @@
 
             .logo1, .logo2, .logo3, .logo4 {
                 position: fixed;
-
             }
 
             .logo1 {
-             z-index: 100000;
+                z-index: 100000;
                 margin-top: 45px;
                 margin-left: 350px;
                 animation: slide-up 0.5s ease forwards; /* 애니메이션 적용 */
             }
 
             .logo2 {
-             z-index: 100000;
+                z-index: 100000;
                 margin-top: 45px;
                 margin-left: 355px;
                 animation: slide-up 0.9s ease forwards; /* 애니메이션 적용 */
             }
 
             .logo3 {
-             z-index: 9999;
+                z-index: 9999;
                 margin-top: 39px;
                 margin-left: 338px;
                 animation: sparkle 1.5s ease-in-out forwards; /* 애니메이션 적용 후 상태 유지 */
@@ -74,7 +73,7 @@
             }
 
             .logo4 {
-             z-index: 100000;
+                z-index: 100000;
                 margin-top: 42px;
                 margin-left: 350px;
                 animation: sparkle 1.5s ease-in-out forwards; /* 애니메이션 적용 후 상태 유지 */
@@ -125,6 +124,60 @@
                 display: flex;
             }
 
+            .dropdown-menu {
+            text-align:center;
+                display: none; /* 처음에는 숨김 */
+                position: absolute; /* 드롭다운을 메뉴 아래에 위치시킴 */
+                background-color: white; /* 배경색 */
+                border: 1px solid #eeeeee; /* 테두리 */
+                z-index: 1000; /* 다른 요소 위에 표시 */
+            }
+
+            .dropdown:hover .dropdown-menu {
+            margin-top:25px;
+            margin-left:-30px;
+                display: block; /* 마우스를 올렸을 때 표시 */
+            }
+/* ============================================================ */
+.dropdown2{
+z-index: 100000;
+                position: fixed;
+                display: flex;
+                margin-top: 140px;
+                margin-left: 370px;
+}
+.menu_pan{
+padding-left:350px;
+padding-top:20px;
+display: flex;
+  width: 100%;
+  height:250px;
+    background: #fff;
+    position: absolute;
+font-size: 15px;
+display: none;
+ top:180px;
+border: 1px solid #eeeeee; /* 테두리 */
+ z-index: 1000; /* 다른 요소 위에 표시 */
+}
+
+.menu_pan2{
+}
+
+.category {
+display: none;
+    padding: 9px 0px;
+    /* width: 180px; */
+    margin-right: 100px;
+}
+.category:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
             @media (max-width: 1400px) {
                 .logo {
                     z-index: 100000;
@@ -156,46 +209,77 @@
     </a>
 
     <div class="dropdown">
-        <button class="btn btn-link dropdown-toggle nav-link px-2" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"><a>마이페이지</a>
+        <button class="btn btn-link dropdown-toggle nav-link px-2" type="button" aria-expanded="false">
+            <a>마이페이지</a>
         </button>
 
         <p sec:authorize="isAuthenticated()" id="result"></p>
         <input type="hidden" id="username" sec:authorize="isAuthenticated()" th:value="${#authentication.name}">
 
-        <ul class="dropdown-menu">
+        <div class="dropdown-menu">
             <li><a class="dropdown-item" href="/orders">이력서 관리</a></li>
             <li><a class="dropdown-item" href="/cart">관심 공고</a></li>
             <li><a class="dropdown-item" href="/userQuestion">고객센터</a></li>
             <li><a class="dropdown-item" href="/mypage">회원 정보</a></li>
-        </ul>
+        </div>
     </div>
+
     <ul class="nav" sec:authorize="isAnonymous()">
         <li><a href="/members/login" class="nav-link">로그인</a></li>
     </ul>
 
-    <div class="bb">
-        <ul class="nav2">
-            <li><a href="#" class="nav-link px-2 link-secondary">채용정보</a></li>
-        </ul>
+    <!-- =================================================================== -->
 
-        <ul class="nav3">
-            <li><a href="/domestic" class="nav-link px-2 link-secondary">인재정보</a></li>
-        </ul>
-        <ul class="nav4">
-            <li><a href="/qna" class="nav-link px-2 link-secondary">커뮤니티</a></li>
-        </ul>
+    <div class="dropdown2">
+        <a href="#" class="nav-link px-2 link-secondary" id="dropdown-toggle">채용정보</a>
+        <a href="/domestic" class="nav-link px-2 link-secondary">인재정보</a>
+        <a href="/qna" class="nav-link px-2 link-secondary">커뮤니티</a>
+        <a href="/event" class="nav-link px-2 link-secondary">이벤트</a>
+        <a href="#" class="nav-link px-2 link-secondary">공지사항</a>
+    </div>
 
-        <ul class="nav6">
-            <li><a href="/event" class="nav-link px-2 link-secondary">이벤트</a></li>
-        </ul>
+    <div>
+        <div class="menu_pan"> <!-- 기본적으로 숨김 -->
+            <ul class="menu_pan2">
+            <li><a href="#" class="dropdown-item">지역별</a></li>
+            <li><a href="#" class="dropdown-item">직무별</a></li>
+            <li><a href="#" class="dropdown-item">TOP100</a></li>
+            </ul>
 
-        <ul class="nav5">
-            <li><a href="#" class="nav-link px-2 link-secondary">공지사항</a></li>
+            <ul class="menu_pan3">
+            <li><a href="#" class="dropdown-item">지역별</a></li>
+            <li><a href="#" class="dropdown-item">직무별</a></li>
+            <li><a href="#" class="dropdown-item">TOP100</a></li>
         </ul>
+    </div>
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" viewBox="0 0 16 16">
-            <g transform="rotate(90 8 8)"> <!-- 90도 회전, 회전 중심 (8, 8) -->
+
+
+
+
+
+ <!--  <div class="bb">
+       <ul class="nav2">
+           <li><a href="#" class="nav-link px-2 link-secondary">채용정보</a></li>
+
+
+       <ul class="nav3">
+           <li><a href="/domestic" class="nav-link px-2 link-secondary">인재정보</a></li>
+       </ul>
+       <ul class="nav4">
+           <li><a href="/qna" class="nav-link px-2 link-secondary">커뮤니티</a></li>
+       </ul>
+
+       <ul class="nav6">
+           <li><a href="/event" class="nav-link px-2 link-secondary">이벤트</a></li>
+       </ul>
+
+       <ul class="nav5">
+           <li><a href="#" class="nav-link px-2 link-secondary">공지사항</a></li>
+       </ul> -->
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" viewBox="0 0 16 16">
+              <g transform="rotate(90 8 8)"> <!-- 90도 회전, 회전 중심 (8, 8) -->
                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
             </g>
         </svg>
@@ -249,6 +333,70 @@
                 setTimeout(restartLogos, 3000); // 3000ms: 3초 대기
             }, 3500); // 3500ms: 3초 대기 후 애니메이션 재시작
         });
+
+
+        //========================================================================================
+
+
+
+            $('.h_menu > li').mouseenter(function(){
+        let menu_i = $(this).index();
+
+        if(menu_i < 4) { //하단 바(빨간색) 이동으로 인해 index는 4 이하로 한정시킴
+
+            $('.menu_pan').css({ //모두 display:none 시킨 후
+                display:'none'
+            }).eq($(this).index()).css({ // 해당 인덱스 넘버만 보여질 수 있도록 한다.
+                display:'block'
+            })
+        }
+    });
+    $('.h_menu > li').mouseleave(function(){
+        let menu_i = $(this).index();
+
+        if(menu_i < 4) {
+
+            $('.menu_pan').eq($(this).index()).css({
+                display:'none'
+
+            })
+        }
+    })
+$(document).ready(function() {
+    var isHovering = false; // 드롭다운 메뉴 상태 변수
+
+    // 드롭다운 메뉴를 마우스 오버 시 표시
+    $('#dropdown-toggle').hover(
+        function() {
+            $('.menu_pan').css('display', 'block'); // 드롭다운 표시
+            isHovering = true; // 드롭다운이 열림
+        }
+    );
+
+    // 드롭다운 메뉴가 있는 부모 요소에 마우스 오버 시 표시
+    $('.dropdown2, .menu_pan').hover(
+        function() {
+            $('.menu_pan').css('display', 'block'); // 드롭다운 표시
+            isHovering = true; // 드롭다운이 열림
+        },
+        function() {
+            if (!isHovering) {
+                $('.menu_pan').css('display', 'none'); // 드롭다운 숨김
+            }
+            isHovering = false; // 드롭다운이 닫힘
+        }
+    );
+
+    // 드롭다운이 사라지기 전에 상태를 체크하여 깜빡임 방지
+    $('.menu_pan').mouseenter(function() {
+        isHovering = true; // 메뉴에 마우스가 올라간 경우
+    }).mouseleave(function() {
+        isHovering = false; // 메뉴에서 마우스가 나간 경우
+        $('.menu_pan').css('display', 'none'); // 드롭다운 숨김
+    });
+});
+    </script>
+
     </script>
 
     </body>
