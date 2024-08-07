@@ -103,7 +103,8 @@
                 z-index: 100000;
                 position: fixed;
                 display: flex;
-                margin-left: 1450px;
+                margin-left: 1550px;
+                margin-top:60px;
             }
 
             .bb {
@@ -120,8 +121,13 @@
             }
 
             .nav7 {
+             margin-left: 10px;
                 z-index: 100000;
                 display: flex;
+            }
+            svg{
+            margin-left: 40px;
+            margin-top:-2px;
             }
 
             .dropdown-menu {
@@ -130,7 +136,12 @@
                 position: absolute; /* 드롭다운을 메뉴 아래에 위치시킴 */
                 background-color: white; /* 배경색 */
                 border: 1px solid #eeeeee; /* 테두리 */
-                z-index: 1000; /* 다른 요소 위에 표시 */
+                z-index:999; /* 다른 요소 위에 표시 */
+            }
+            .dropdown-menu li{
+            text-align:center;
+         margin-left:-800px;
+            z-index: 100000;
             }
 
             .dropdown:hover .dropdown-menu {
@@ -144,51 +155,65 @@ z-index: 100000;
                 position: fixed;
                 display: flex;
                 margin-top: 140px;
-                margin-left: 370px;
-}
-.menu_pan{
-padding-left:350px;
-padding-top:20px;
-display: flex;
-  width: 100%;
-  height:250px;
-    background: #fff;
-    position: absolute;
-font-size: 15px;
-display: none;
- top:180px;
-border: 1px solid #eeeeee; /* 테두리 */
- z-index: 1000; /* 다른 요소 위에 표시 */
-}
+                margin-left:370px;
+                flex-direction: row; /* 수평 배치 */
+    white-space: nowrap; /* 줄 바꿈 방지 */
 
-.menu_pan2{
-}
-
-.category {
-display: none;
-    padding: 9px 0px;
-    /* width: 180px; */
-    margin-right: 100px;
-}
-.category:hover {
-    text-decoration: underline;
 }
 
 
+  .menu_pan {
+            display: none; /* 기본적으로 숨김 */
+            position: absolute;
+            width:3000px;
+            left:-370px;
+            font-size: 15px;
+            top: 40px; /* 적절한 위치 */
+            border-bottom: 1px solid #eeeeee;
+            background-color: rgb(255 255 255 / 70%);
+            box-shadow: 0 1px 30px rgba(240, 237, 233, 0.596);
+            backdrop-filter: blur(10px);
+            z-index: 1000; /* 다른 요소 위에 표시 */
+        }
+
+
+        .dropdown2:hover .menu_pan {
+            display: flex; /* 드롭다운 메뉴 표시 */
+        }
+        .dropdown-item{
+        padding-top:10px;
+       margin-left:350px;
+        }
 
 
 
-            @media (max-width: 1400px) {
-                .logo {
+
+
+            @media (max-width: 1000px) {
+
+            .logo1, .logo2, .logo3, .logo4 {
+
                     z-index: 100000;
-                    margin-left: 50px; /* 로고를 좀 더 왼쪽으로 이동 */
-                }
+                    margin-left: 10px; /* 로고를 좀 더 왼쪽으로 이동 */
+            }
 
                 .dropdown {
                     z-index: 100000;
-                    margin-left: 300px; /* 드롭다운 메뉴도 왼쪽으로 이동 */
+                    margin-left: 270px; /* 드롭다운 메뉴도 왼쪽으로 이동 */
                 }
+            .dropdown2{
+            z-index: 100000;
+            font-size:15px;
+             margin-left:30px;
             }
+            .nav{
+              z-index: 100000;
+               margin-left:370px;
+            }
+            .nav7, svg{
+            display:none;
+            }
+
         </style>
     </head>
     <body>
@@ -231,55 +256,50 @@ display: none;
     <!-- =================================================================== -->
 
     <div class="dropdown2">
-        <a href="#" class="nav-link px-2 link-secondary" id="dropdown-toggle">채용정보</a>
-        <a href="/domestic" class="nav-link px-2 link-secondary">인재정보</a>
+        <a href="/domestic" class="nav-link px-2 link-secondary">채용정보</a>
+        <a href="/overseas" class="nav-link px-2 link-secondary">인재정보</a>
         <a href="/qna" class="nav-link px-2 link-secondary">커뮤니티</a>
         <a href="/event" class="nav-link px-2 link-secondary">이벤트</a>
-        <a href="#" class="nav-link px-2 link-secondary">공지사항</a>
-    </div>
+        <a href="/api/list" class="nav-link px-2 link-secondary">공지사항</a>
 
-    <div>
-        <div class="menu_pan"> <!-- 기본적으로 숨김 -->
-            <ul class="menu_pan2">
-            <li><a href="#" class="dropdown-item">지역별</a></li>
-            <li><a href="#" class="dropdown-item">직무별</a></li>
-            <li><a href="#" class="dropdown-item">TOP100</a></li>
-            </ul>
 
-            <ul class="menu_pan3">
-            <li><a href="#" class="dropdown-item">지역별</a></li>
-            <li><a href="#" class="dropdown-item">직무별</a></li>
-            <li><a href="#" class="dropdown-item">TOP100</a></li>
-        </ul>
-    </div>
+        <div>
+            <div class="menu_pan"> <!-- 기본적으로 숨김 -->
+                <ul class="menu_pan2">
+                    <li><a href="#" class="dropdown-item">지역별</a></li>
+                    <li><a href="#" class="dropdown-item">직무별</a></li>
+                    <li><a href="#" class="dropdown-item">TOP100</a></li>
+                </ul>
+            </div>
+        </div>
 
 
 
 
 
 
- <!--  <div class="bb">
-       <ul class="nav2">
-           <li><a href="#" class="nav-link px-2 link-secondary">채용정보</a></li>
+        <!--  <div class="bb">
+              <ul class="nav2">
+                  <li><a href="#" class="nav-link px-2 link-secondary">채용정보</a></li>
 
 
-       <ul class="nav3">
-           <li><a href="/domestic" class="nav-link px-2 link-secondary">인재정보</a></li>
-       </ul>
-       <ul class="nav4">
-           <li><a href="/qna" class="nav-link px-2 link-secondary">커뮤니티</a></li>
-       </ul>
+              <ul class="nav3">
+                  <li><a href="/domestic" class="nav-link px-2 link-secondary">인재정보</a></li>
+              </ul>
+              <ul class="nav4">
+                  <li><a href="/qna" class="nav-link px-2 link-secondary">커뮤니티</a></li>
+              </ul>
 
-       <ul class="nav6">
-           <li><a href="/event" class="nav-link px-2 link-secondary">이벤트</a></li>
-       </ul>
+              <ul class="nav6">
+                  <li><a href="/event" class="nav-link px-2 link-secondary">이벤트</a></li>
+              </ul>
 
-       <ul class="nav5">
-           <li><a href="#" class="nav-link px-2 link-secondary">공지사항</a></li>
-       </ul> -->
+              <ul class="nav5">
+                  <li><a href="#" class="nav-link px-2 link-secondary">공지사항</a></li>
+              </ul> -->
 
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" viewBox="0 0 16 16">
-              <g transform="rotate(90 8 8)"> <!-- 90도 회전, 회전 중심 (8, 8) -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" viewBox="0 0 16 16">
+            <g transform="rotate(90 8 8)"> <!-- 90도 회전, 회전 중심 (8, 8) -->
                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
             </g>
         </svg>
@@ -335,66 +355,20 @@ display: none;
         });
 
 
-        //========================================================================================
+        //============================드롭다운=====================================================
+      // 드롭다운 메뉴가 영역을 벗어났을 때 숨기기
+            $('.dropdown2').on('mouseleave', function () {
+                $('.menu_pan').hide(); // 드롭다운 메뉴 숨김
+            });
+
+            // 드롭다운 메뉴에 마우스가 올라가면 보여주기
+            $('.dropdown2').on('mouseenter', function () {
+                $('.menu_pan').show(); // 드롭다운 메뉴 표시
+            });
+        });
 
 
 
-            $('.h_menu > li').mouseenter(function(){
-        let menu_i = $(this).index();
-
-        if(menu_i < 4) { //하단 바(빨간색) 이동으로 인해 index는 4 이하로 한정시킴
-
-            $('.menu_pan').css({ //모두 display:none 시킨 후
-                display:'none'
-            }).eq($(this).index()).css({ // 해당 인덱스 넘버만 보여질 수 있도록 한다.
-                display:'block'
-            })
-        }
-    });
-    $('.h_menu > li').mouseleave(function(){
-        let menu_i = $(this).index();
-
-        if(menu_i < 4) {
-
-            $('.menu_pan').eq($(this).index()).css({
-                display:'none'
-
-            })
-        }
-    })
-$(document).ready(function() {
-    var isHovering = false; // 드롭다운 메뉴 상태 변수
-
-    // 드롭다운 메뉴를 마우스 오버 시 표시
-    $('#dropdown-toggle').hover(
-        function() {
-            $('.menu_pan').css('display', 'block'); // 드롭다운 표시
-            isHovering = true; // 드롭다운이 열림
-        }
-    );
-
-    // 드롭다운 메뉴가 있는 부모 요소에 마우스 오버 시 표시
-    $('.dropdown2, .menu_pan').hover(
-        function() {
-            $('.menu_pan').css('display', 'block'); // 드롭다운 표시
-            isHovering = true; // 드롭다운이 열림
-        },
-        function() {
-            if (!isHovering) {
-                $('.menu_pan').css('display', 'none'); // 드롭다운 숨김
-            }
-            isHovering = false; // 드롭다운이 닫힘
-        }
-    );
-
-    // 드롭다운이 사라지기 전에 상태를 체크하여 깜빡임 방지
-    $('.menu_pan').mouseenter(function() {
-        isHovering = true; // 메뉴에 마우스가 올라간 경우
-    }).mouseleave(function() {
-        isHovering = false; // 메뉴에서 마우스가 나간 경우
-        $('.menu_pan').css('display', 'none'); // 드롭다운 숨김
-    });
-});
     </script>
 
     </script>

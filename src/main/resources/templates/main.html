@@ -20,16 +20,19 @@
         .main2 {
             position: relative;
             z-index: 4;
-            top: 185px;
+            top: 105px;
             width: 100%;
-            background-color: #f9f9f9;
-            height: 650px;
+            background-color: #f5f5f5;
+            height: 540px;
+            border-bottom:1px solid #eeeeee;
+            box-shadow: 0 1px 30px rgba(240, 237, 233, 0.596);
+
         }
 
         .slider__wrap {
             position: relative;
             width: 100%;
-            height: 640px;
+            height: 780px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -37,9 +40,10 @@
         }
 
         .slider__img {
+         top: -50px;
             position: relative;
             width: 800px;
-            height: 450px;
+            height: 500px;
         }
 
         .slider__inner {
@@ -55,7 +59,7 @@
         .slider {
             position: relative;
             width: 800px;
-            height: 450px;
+            height: 550px;
         }
 
         .slider span {
@@ -85,7 +89,8 @@
 
         .slider__btn button {
             position: absolute;
-            top: 50%;
+            top: 40%;
+
             transform: translateY(-50%);
             width: 50px;
             height: 50px;
@@ -106,11 +111,11 @@
         }
 
         .slider__btn button.prev {
-            left: 0;
+        left:10px;
         }
 
         .slider__btn button.next {
-            right: 0;
+            right: 10px;
         }
     </style>
 </head>
