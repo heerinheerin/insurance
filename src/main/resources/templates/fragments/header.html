@@ -69,7 +69,7 @@
                 margin-top: 39px;
                 margin-left: 338px;
                 animation: sparkle 1.5s ease-in-out forwards; /* 애니메이션 적용 후 상태 유지 */
-                animation-iteration-count: 2; /* 애니메이션 반복 횟수 */
+                animation-iteration-count: 3; /* 애니메이션 반복 횟수 */
             }
 
             .logo4 {
@@ -77,7 +77,7 @@
                 margin-top: 42px;
                 margin-left: 350px;
                 animation: sparkle 1.5s ease-in-out forwards; /* 애니메이션 적용 후 상태 유지 */
-                animation-iteration-count: 2; /* 애니메이션 반복 횟수 */
+                animation-iteration-count: 3; /* 애니메이션 반복 횟수 */
             }
 
             @keyframes slide-up {
@@ -99,12 +99,21 @@
                 margin-left: 1450px;
             }
 
-            .nav {
+            .login {
+             position: fixed;
                 z-index: 100000;
                 position: fixed;
                 display: flex;
                 margin-left: 1550px;
-                margin-top:60px;
+                margin-top:68px;
+            }
+
+            .logout{
+            z-index: 100000;
+                position: fixed;
+                display: flex;
+                margin-left:500px;
+                margin-top:68px;
             }
 
             .bb {
@@ -131,25 +140,38 @@
             }
 
             .dropdown-menu {
+
             text-align:center;
                 display: none; /* 처음에는 숨김 */
                 position: absolute; /* 드롭다운을 메뉴 아래에 위치시킴 */
-                background-color: white; /* 배경색 */
-                border: 1px solid #eeeeee; /* 테두리 */
+              background-color: rgb(255 255 255 / 70%);
+                backdrop-filter: blur(10px);
+                border: none; /* 테두리 */
                 z-index:999; /* 다른 요소 위에 표시 */
             }
             .dropdown-menu li{
             text-align:center;
-         margin-left:-800px;
+         margin-left:-346px;
             z-index: 100000;
             }
 
             .dropdown:hover .dropdown-menu {
-            margin-top:25px;
+            margin-top:35px;
             margin-left:-30px;
                 display: block; /* 마우스를 올렸을 때 표시 */
             }
-/* ============================================================ */
+              .dropdown-item{
+              width:150px;
+        padding-top:5px;
+       margin-left:350px;
+  }
+   .dropdown-item:hover{
+   color:	#87ceeb;
+   background-color: transparent;
+
+   }
+
+/* ========================채용정보~공지사항 메뉴==================================== */
 .dropdown2{
 z-index: 100000;
                 position: fixed;
@@ -175,15 +197,31 @@ z-index: 100000;
             backdrop-filter: blur(10px);
             z-index: 1000; /* 다른 요소 위에 표시 */
         }
-
-
         .dropdown2:hover .menu_pan {
             display: flex; /* 드롭다운 메뉴 표시 */
         }
-        .dropdown-item{
-        padding-top:10px;
-       margin-left:350px;
-        }
+
+.a1, .a2, .a3, .a4, .a5 {
+    text-decoration: none;
+    position: relative;
+}
+
+.a1::after, .a2::after, .a3::after, .a4::after, .a5::after {
+    content: ""; /* 가상 요소를 생성 */
+    position: absolute; /* 절대 위치 설정 */
+    left: 50%; /* 중앙 정렬 */
+    bottom: 10px; /* 텍스트 아래 위치 */
+    width: 0; /* 초기 너비 0 */
+    height: 2px; /* 줄의 높이 */
+    background-color:		#add8e6; /* 줄 색상 */
+    transition: width 0.3s ease, left 0.3s ease; /* 너비와 위치 변화에 애니메이션 추가 */
+}
+
+.a1:hover::after, .a2:hover::after, .a3:hover::after, .a4:hover::after, .a5:hover::after {
+    width: 100%; /* 마우스 오버 시 너비를 100%로 변경 */
+    left: 0; /* 줄이 왼쪽으로 이동 */
+}
+
 
 
 
@@ -249,18 +287,18 @@ z-index: 100000;
         </div>
     </div>
 
-    <ul class="nav" sec:authorize="isAnonymous()">
+    <ul class="login" sec:authorize="isAnonymous()">
         <li><a href="/members/login" class="nav-link">로그인</a></li>
     </ul>
 
     <!-- =================================================================== -->
 
     <div class="dropdown2">
-        <a href="/domestic" class="nav-link px-2 link-secondary">채용정보</a>
-        <a href="/overseas" class="nav-link px-2 link-secondary">인재정보</a>
-        <a href="/qna" class="nav-link px-2 link-secondary">커뮤니티</a>
-        <a href="/event" class="nav-link px-2 link-secondary">이벤트</a>
-        <a href="/api/list" class="nav-link px-2 link-secondary">공지사항</a>
+        <a href="/domestic" class="a1 px-2 link-secondary">채용정보</a>
+        <a href="/overseas" class="a2 px-2 link-secondary">인재정보</a>
+        <a href="/qna" class="a3 px-2 link-secondary">커뮤니티</a>
+        <a href="/event" class="a4 px-2 link-secondary">이벤트</a>
+        <a href="/api/list" class="a5 px-2 link-secondary">공지사항</a>
 
 
         <div>
@@ -273,31 +311,6 @@ z-index: 100000;
             </div>
         </div>
 
-
-
-
-
-
-        <!--  <div class="bb">
-              <ul class="nav2">
-                  <li><a href="#" class="nav-link px-2 link-secondary">채용정보</a></li>
-
-
-              <ul class="nav3">
-                  <li><a href="/domestic" class="nav-link px-2 link-secondary">인재정보</a></li>
-              </ul>
-              <ul class="nav4">
-                  <li><a href="/qna" class="nav-link px-2 link-secondary">커뮤니티</a></li>
-              </ul>
-
-              <ul class="nav6">
-                  <li><a href="/event" class="nav-link px-2 link-secondary">이벤트</a></li>
-              </ul>
-
-              <ul class="nav5">
-                  <li><a href="#" class="nav-link px-2 link-secondary">공지사항</a></li>
-              </ul> -->
-
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" viewBox="0 0 16 16">
             <g transform="rotate(90 8 8)"> <!-- 90도 회전, 회전 중심 (8, 8) -->
                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
@@ -309,7 +322,7 @@ z-index: 100000;
             <li><a href="#" class="nav-link px-2 link-secondary">공지사항 작성</a></li>
         </ul>
 
-        <ul class="nav9" sec:authorize="isAuthenticated()">
+        <ul class="logout" sec:authorize="isAuthenticated()">
             <a class="nav-link" href="/members/logout">로그아웃</a>
         </ul>
     </div>
@@ -337,22 +350,21 @@ z-index: 100000;
                 }
             });
 
-            function restartLogos() {
-                // logo1과 logo2의 애니메이션을 초기화하고 다시 적용
-                $('.logo1, .logo2').css('animation', 'none'); // 애니메이션 제거
-                $('.logo1, .logo2').height(); // 리플로우를 트리거하여 애니메이션 초기화
-                $('.logo1').css('animation', 'slide-up 0.5s ease forwards'); // 애니메이션 재적용
-                $('.logo2').css('animation', 'slide-up 0.9s ease forwards'); // 애니메이션 재적용
-            }
+            $(document).ready(function () {
+    function restartLogos() {
+        // logo1과 logo2의 애니메이션을 초기화하고 다시 적용
+        $('.logo1, .logo2').css('animation', 'none'); // 애니메이션 제거
+        $('.logo1, .logo2').height(); // 리플로우를 트리거하여 애니메이션 초기화
+        $('.logo1').css('animation', 'slide-up 0.5s ease forwards'); // 애니메이션 재적용
+        $('.logo2').css('animation', 'slide-up 0.9s ease forwards'); // 애니메이션 재적용
+    }
 
-            // 초기 애니메이션 시작
-            restartLogos();
+    // 초기 애니메이션 시작
+    restartLogos();
 
-            // 애니메이션 후 3초 대기 후 재시작
-            setInterval(function () {
-                setTimeout(restartLogos, 3000); // 3000ms: 3초 대기
-            }, 3500); // 3500ms: 3초 대기 후 애니메이션 재시작
-        });
+    // 애니메이션 후 3초 대기 후 재시작
+    setInterval(restartLogos, 4500); // 4500ms마다 애니메이션 재시작
+});
 
 
         //============================드롭다운=====================================================
