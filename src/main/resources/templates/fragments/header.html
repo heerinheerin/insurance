@@ -24,7 +24,7 @@
                 z-index: 10;
                 background-color: rgb(255 255 255 / 70%);
                 backdrop-filter: blur(10px);
-                box-shadow: 0 1px 30px rgba(240, 237, 233, 0.596);
+                box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -92,6 +92,7 @@
             }
 
             .dropdown {
+
                 z-index: 100000;
                 position: fixed;
                 display: flex;
@@ -100,6 +101,9 @@
             }
 
             .login {
+
+    white-space: nowrap; /* 줄 바꿈 방지 */
+
              position: fixed;
                 z-index: 100000;
                 position: fixed;
@@ -156,7 +160,7 @@
             }
 
             .dropdown:hover .dropdown-menu {
-            margin-top:35px;
+            margin-top:25px;
             margin-left:-30px;
                 display: block; /* 마우스를 올렸을 때 표시 */
             }
@@ -166,8 +170,6 @@
        margin-left:350px;
   }
    .dropdown-item:hover{
-   color:	#87ceeb;
-   background-color: transparent;
 
    }
 
@@ -180,9 +182,7 @@ z-index: 100000;
                 margin-left:370px;
                 flex-direction: row; /* 수평 배치 */
     white-space: nowrap; /* 줄 바꿈 방지 */
-
 }
-
 
   .menu_pan {
             display: none; /* 기본적으로 숨김 */
@@ -198,7 +198,14 @@ z-index: 100000;
             z-index: 1000; /* 다른 요소 위에 표시 */
         }
         .dropdown2:hover .menu_pan {
+
             display: flex; /* 드롭다운 메뉴 표시 */
+        }
+        .menu_pan2{
+        padding-top:10px;
+        }
+        .menu_pan2 li:hover{
+          color:	#87ceeb;
         }
 
 .a1, .a2, .a3, .a4, .a5 {
@@ -213,7 +220,7 @@ z-index: 100000;
     bottom: 10px; /* 텍스트 아래 위치 */
     width: 0; /* 초기 너비 0 */
     height: 2px; /* 줄의 높이 */
-    background-color:		#add8e6; /* 줄 색상 */
+    background-color:		#b0e0e6; /* 줄 색상 */
     transition: width 0.3s ease, left 0.3s ease; /* 너비와 위치 변화에 애니메이션 추가 */
 }
 
@@ -221,9 +228,34 @@ z-index: 100000;
     width: 100%; /* 마우스 오버 시 너비를 100%로 변경 */
     left: 0; /* 줄이 왼쪽으로 이동 */
 }
-
-
-
+/* ========================서치버튼==================================== */
+.search-box{
+z-index: 100000;
+position:fixed;
+margin-top: 55px;
+margin-left: 585px;
+height:40px;
+width:452px;
+background-color:#ffffff;
+border-radius:10px;
+padding:10px;
+border:2px solid #b0e0e6;
+}
+.search-txt{
+height:16px;
+z-index: 100000;
+border:none;
+background: none;
+outline: none;
+float:left;
+font-size:15px;
+width:200px;
+}
+.btnimg{
+z-index: 100000;
+float:right;
+background: none;
+}
 
 
 
@@ -270,6 +302,10 @@ z-index: 100000;
     <a class="logo4" href="/">
         <img th:src="@{/css/images/logo4.png}" height="59">
     </a>
+    <form class="search-box" action="" method="get">
+        <input class="search-txt" type="text" name="" placeholder="검색어를 입력하세요.">
+        <button class="search-btn" type="submit"><div class="btnimg"> <img th:src="@{/css/images/search.png}" height="40"> </button>
+        </div>  </form>
 
     <div class="dropdown">
         <button class="btn btn-link dropdown-toggle nav-link px-2" type="button" aria-expanded="false">
@@ -288,8 +324,10 @@ z-index: 100000;
     </div>
 
     <ul class="login" sec:authorize="isAnonymous()">
-        <li><a href="/members/login" class="nav-link">로그인</a></li>
+        <li><a href="/members/login" class="nav-link" >로그인</a></li>
     </ul>
+
+
 
     <!-- =================================================================== -->
 
@@ -326,6 +364,9 @@ z-index: 100000;
             <a class="nav-link" href="/members/logout">로그아웃</a>
         </ul>
     </div>
+
+
+
 
     <script>
         $(document).ready(function () {
