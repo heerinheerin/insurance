@@ -235,7 +235,7 @@ position:fixed;
 margin-top: 55px;
 margin-left: 585px;
 height:40px;
-width:452px;
+width:450px;
 background-color:#ffffff;
 border-radius:10px;
 padding:10px;
@@ -251,10 +251,13 @@ float:left;
 font-size:15px;
 width:200px;
 }
-.btnimg{
+.search-btn{
+margin-right:-15px;
+margin-top:-15px;
 z-index: 100000;
 float:right;
 background: none;
+border:none;
 }
 
 
@@ -304,7 +307,7 @@ background: none;
     </a>
     <form class="search-box" action="" method="get">
         <input class="search-txt" type="text" name="" placeholder="검색어를 입력하세요.">
-        <button class="search-btn" type="submit"><div class="btnimg"> <img th:src="@{/css/images/search.png}" height="40"> </button>
+        <button class="search-btn" type="submit"> <img th:src="@{/css/images/search.png}" height="45"> </button>
         </div>  </form>
 
     <div class="dropdown">
