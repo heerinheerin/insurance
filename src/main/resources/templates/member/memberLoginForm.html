@@ -30,13 +30,13 @@
               z-index: 10;
               background-color: rgb(255 255 255 / 70%);
               backdrop-filter: blur(10px);
-              box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+             /* box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);*/
               position: fixed;
               top: 0;
               left: 0;
               right: 0;
               height: 180px;
-              border-bottom: 1px solid #eeeeee;
+             /* border-bottom: 1px solid #eeeeee;*/
               font-weight: bold;
               flex-direction: column; /* 수직 배치 */
               align-items: center;
@@ -52,8 +52,8 @@
 z-index: 100000;
                 position: fixed;
                 display: flex;
-                margin-top: 140px;
-                margin-left:370px;
+                margin-top: 187px;
+                margin-left:400px;
                 flex-direction: row; /* 수평 배치 */
     white-space: nowrap; /* 줄 바꿈 방지 */
 }
@@ -61,10 +61,10 @@ z-index: 100000;
   .menu_pan {
             display: none; /* 기본적으로 숨김 */
             position: absolute;
-            width:3000px;
-            left:-370px;
+            width:975.5px;
+            left:72px;
             font-size: 15px;
-            top: 40px; /* 적절한 위치 */
+            top: 32px; /* 적절한 위치 */
             border-bottom: 1px solid #eeeeee;
             background-color: rgb(255 255 255 / 70%);
             box-shadow: 0 1px 30px rgba(240, 237, 233, 0.596);
@@ -72,7 +72,6 @@ z-index: 100000;
             z-index: 1000; /* 다른 요소 위에 표시 */
         }
         .dropdown2:hover .menu_pan {
-
             display: flex; /* 드롭다운 메뉴 표시 */
         }
         .menu_pan2{
@@ -92,7 +91,7 @@ z-index: 100000;
     content: ""; /* 가상 요소를 생성 */
     position: absolute; /* 절대 위치 설정 */
     left: 50%; /* 중앙 정렬 */
-    bottom: 10px; /* 텍스트 아래 위치 */
+    bottom: 29px; /* 텍스트 아래 위치 */
     width: 0; /* 초기 너비 0 */
     height: 2px; /* 줄의 높이 */
     background-color:		#b0e0e6; /* 줄 색상 */
@@ -108,8 +107,8 @@ z-index: 100000;
 .search-box{
 z-index: 100000;
 position:fixed;
-margin-top: -15px;
-margin-left: 720px;
+margin-top: -16px;
+margin-left: 670px;
 height:40px;
 width:360px;
 background-color:#ffffff;
@@ -235,12 +234,24 @@ border:none;
       }
 
      .loginLogo {
-
-          margin-left:85px;
-          margin-top:-30px;
+     position:absolute;
+       z-index: 100000;
+         margin-left:495px;
+          margin-top:5px;
           display: block;
           height: 4.5rem;
           background-size: 100%;
+
+      }
+      .loginback{
+       margin-left:115px;
+       margin-top:30px;
+      background-color:#ffffff;
+      width:180px;
+height:25px;
+ border-bottom: 2px solid rgba(250, 232, 170, 50%);
+ border-left: 2px solid rgba(250, 232, 170, 50%);
+  border-right: 2px solid rgba(250, 232, 170, 50%);
 
       }
 
@@ -251,12 +262,22 @@ border:none;
       /*================================여기까지 로고==============================  */
 .loginbox{
 position:fixed;
-margin-top:185px;
+margin-top:210px;
 margin-left:0px;
 width:100%;
-height:800px;
-background-color:#fff8e2;
-
+height:570px;
+     background-color: #ffffff;
+        }
+        .loginbox2{
+  background-color:#ffffff;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+        margin-top:7px;
+margin-left:469px;
+width:982px;
+height:575px;
+ border: 2px solid rgba(250, 233, 175, 60%);
+   backdrop-filter: blur(10px);
         }
 
 
@@ -296,9 +317,10 @@ background-color:#fff8e2;
         </div>
     </div>
 
-    <a class="loginLogo" href="/">
-        <img th:src="@{/css/images/logo.png}" height="75">
+    <a class="loginLogo">
+        <img th:src="@{/css/images/login.png}" height="55">
     </a>
+    <div class="loginback"></div>
 
     <form class="search-box" action="" method="get">
         <input class="search-txt" type="text" name="" placeholder="검색어를 입력하세요.">
@@ -307,8 +329,39 @@ background-color:#fff8e2;
 
 </div>
     <div class="loginbox">
+        <div class="loginbox2">
+            <form action="/members/login" role="form" method="post">
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="floatingInput" name="email" placeholder="이메일">
+                    <label for="floatingInput">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#a9a9a9"
+                             class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                        </svg>
+                        이메일 입력
+                    </label>
+                </div>
+
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="비밀번호">
+                    <label for="floatingPassword">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#a9a9a9"
+                             class="bi bi-lock" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+                        </svg>
+                        비밀번호 입력
+                    </label>
+                </div>
+
+                <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
+                <button class="btn btn-primary w-100 py-2 mt-3" type="submit">로그인</button>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            </form>
 
 
+
+
+        </div>
     </div>
 
 </main>
