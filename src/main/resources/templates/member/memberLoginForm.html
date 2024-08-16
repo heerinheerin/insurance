@@ -8,11 +8,11 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script th:inline="javascript">
         $(document).ready(function () {
-            var errorMessage = /*[[${errorMessage}]]*/ null;
-            if (errorMessage != null) {
-                alert(errorMessage);
-            }
-        });
+                var errorMessage = [[${errorMessage}]];
+                if (errorMessage != null) {
+                    alert(errorMessage);
+                }
+            });
 
     </script>
     <style th:inline="css">
@@ -264,21 +264,103 @@ height:25px;
 position:fixed;
 margin-top:210px;
 margin-left:0px;
-width:100%;
-height:570px;
-     background-color: #ffffff;
+
         }
         .loginbox2{
-  background-color:#ffffff;
-                backdrop-filter: blur(10px);
-                box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
-        margin-top:7px;
+background-color:#ffffff;
+backdrop-filter: blur(10px);
+box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+margin-top:7px;
 margin-left:469px;
 width:982px;
 height:575px;
- border: 2px solid rgba(250, 233, 175, 60%);
-   backdrop-filter: blur(10px);
+border: 2px solid rgba(250, 233, 175, 60%);
+backdrop-filter: blur(10px);
         }
+         /*================================가운데 노란 상자==============================  */
+
+.email-login{
+    position: fixed;
+    margin-left: 200px;
+    margin-top:50px;
+            width: 600px;
+}
+
+.pw-login{
+ position: fixed;
+  margin-top:150px;
+       margin-left: 200px;
+            width: 600px;
+
+}
+.email-login input[type="email"] {
+    margin-top: 30px;
+    border: none;
+    border-bottom: 1px solid #fff8e2;
+    box-shadow: 0px -4px 2px #c8e6e9; /* 블러 반경을 줄이고 색상을 어두운 색으로 설정 */
+     border-bottom-right-radius: 0;
+     border-bottom-left-radius: 0; /* 둥글게 하지 않도록 설정 */
+      border-top-left-radius: 20px;
+       border-top-right-radius: 0; /* 둥글게 하지 않도록 설정 */
+
+
+}
+
+.pw-login input[type="password"] {
+    margin-top: 50px;
+    border: none;
+    border-bottom: 1px solid #fff8e2;
+    box-shadow: 0 4px 2px #c8e6e9; /* 블러 반경을 줄이고 색상을 어두운 색으로 설정 */
+     border-bottom-right-radius: 20px;
+     border-bottom-left-radius: 0; /* 둥글게 하지 않도록 설정 */
+      border-top-left-radius: 0;
+       border-top-right-radius: 0; /* 둥글게 하지 않도록 설정 */
+}
+
+            label {
+
+                position: relative;
+                color: #a9a9a9
+            }
+
+.error {
+margin-top: 13px;
+font-size: 0.8rem;
+color: #ff322e;
+word-break: keep-all;
+}
+
+            .login-btn {
+ position: fixed;
+            margin-top: 300px;
+            margin-left: 200px;
+                display: block;
+                width: 100px;
+                padding: 20px;
+                font-size: 1rem;
+                font-weight: 600;
+                text-align: center;
+                color: #ffffff;
+                background-color: #0d6efd;
+                border: 1px solid #0d6efd;
+                border-radius: 10px;
+                transition: background-color 0.3s;
+            }
+
+            .btn-primary:hover {
+             margin-top: 35px;
+                background-color: #1e90ff;
+                border-color: #1e90ff;
+            }
+
+
+            .member {
+             position: fixed;
+                max-width: 9000px;
+
+                text-align: center ;
+                margin-top: 300px ;
+            }
 
 
     </style>
@@ -294,7 +376,7 @@ height:575px;
     <h2 id="go"> <img th:src="@{/css/images/loginlogo2.png}" height="90"></h2>
 </div>
 <!-- =================================================================== -->
-<main class="form-signin w-130 m-60">
+<main class="form-signin">
 
 <div class="header">
 </div>
@@ -330,42 +412,47 @@ height:575px;
 </div>
     <div class="loginbox">
         <div class="loginbox2">
-            <form action="/members/login" role="form" method="post">
-                <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" name="email" placeholder="이메일">
-                    <label for="floatingInput">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#a9a9a9"
-                             class="bi bi-person" viewBox="0 0 16 16">
-                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-                        </svg>
-                        이메일 입력
-                    </label>
-                </div>
-
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="비밀번호">
-                    <label for="floatingPassword">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#a9a9a9"
-                             class="bi bi-lock" viewBox="0 0 16 16">
-                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
-                        </svg>
-                        비밀번호 입력
-                    </label>
-                </div>
-
-                <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
-                <button class="btn btn-primary w-100 py-2 mt-3" type="submit">로그인</button>
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            </form>
 
 
+                <form action="/members/login" role="form" method="post">
+                    <div class="email-login">
+                        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="이메일">
+                        <label for="floatingInput">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#a9a9a9"
+                                 class="bi bi-person" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                            </svg>
+                            이메일 입력
+                        </label>
+                    </div>
+
+                    <div class="pw-login">
+                        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="비밀번호">
+                        <label for="floatingPassword">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#a9a9a9"
+                                 class="bi bi-lock" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+                            </svg>
+                            비밀번호 입력
+                        </label>
+                    </div>
+
+                    <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
+                    <button class="login-btn" type="submit">로그인</button>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                </form>
+
+
+            <div class="member">
+                <a href="/members/new" class="nav-link px-2">회원가입</a>
+            </div>
 
 
         </div>
-    </div>
+      </div>
 
-</main>
+  </main>
 
 
-</body>
-</html>
+  </body>
+  </html>
