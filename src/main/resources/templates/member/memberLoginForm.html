@@ -14,6 +14,8 @@
                 }
             });
 
+
+
     </script>
     <style th:inline="css">
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
@@ -260,67 +262,83 @@ height:25px;
           100% { opacity: 1; }
       }
       /*================================여기까지 로고==============================  */
-.loginbox{
-position:fixed;
-margin-top:210px;
-margin-left:0px;
+  .loginbox {
+            position: fixed;
+            margin-top: 210px;
+            margin-left: 0px;
+        }
 
-        }
-        .loginbox2{
-background-color:#ffffff;
-backdrop-filter: blur(10px);
-box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
-margin-top:7px;
-margin-left:469px;
-width:982px;
-height:575px;
-border: 2px solid rgba(250, 233, 175, 60%);
-backdrop-filter: blur(10px);
-        }
-         /*================================가운데 노란 상자==============================  */
+    .loginbox2 {
+    background-color: #ffffff;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+    margin-top: 7px;
+    margin-left: 469px;
+    width: 982px;
+    height: 575px;
+    border: 3px solid transparent;
+    border-image: linear-gradient(50deg, #c8e6e9 30%, #fff8e2 67%, #c8e6e9 4%);
+    border-image-slice: 1;
+    position: relative;
+      transition-duration: 1s;
+  transition-timing-function: ease-in;
+  transition-duration: 1s;
+
+}
+
+         /*================================가운데 메인 상자==============================  */
 
 .email-login{
     position: fixed;
-    margin-left: 200px;
-    margin-top:50px;
-            width: 600px;
+    margin-left: 210px;
+    margin-top:150px;
+            width: 560px;
 }
 
 .pw-login{
  position: fixed;
-  margin-top:150px;
-       margin-left: 200px;
-            width: 600px;
+  margin-top:250px;
+       margin-left: 210px;
+            width: 560px;
 
 }
 .email-login input[type="email"] {
-    margin-top: 30px;
+text-align:center;
     border: none;
-    border-bottom: 1px solid #fff8e2;
-    box-shadow: 0px -4px 2px #c8e6e9; /* 블러 반경을 줄이고 색상을 어두운 색으로 설정 */
+    border-top: 2px solid #fff8e2;
+    box-shadow: 0px -4px 2px #d3d3d3; /* 블러 반경을 줄이고 색상을 어두운 색으로 설정 */
      border-bottom-right-radius: 0;
      border-bottom-left-radius: 0; /* 둥글게 하지 않도록 설정 */
       border-top-left-radius: 20px;
        border-top-right-radius: 0; /* 둥글게 하지 않도록 설정 */
-
-
 }
 
 .pw-login input[type="password"] {
-    margin-top: 50px;
+text-align:center;
     border: none;
-    border-bottom: 1px solid #fff8e2;
-    box-shadow: 0 4px 2px #c8e6e9; /* 블러 반경을 줄이고 색상을 어두운 색으로 설정 */
-     border-bottom-right-radius: 20px;
+    border-bottom: 2px solid #c8e6e9;
+    box-shadow: 0 4px 2px 	#d3d3d3; /* 블러 반경을 줄이고 색상을 어두운 색으로 설정 */
+    border-bottom-right-radius: 20px;
      border-bottom-left-radius: 0; /* 둥글게 하지 않도록 설정 */
       border-top-left-radius: 0;
        border-top-right-radius: 0; /* 둥글게 하지 않도록 설정 */
 }
 
-            label {
-
-                position: relative;
+            .email-label {
+             position: fixed;
+            margin-top: 115px;
+            margin-left: 410px;
                 color: #a9a9a9
+                margin-top:310px;
+
+            }
+              .pw-label {
+             position: fixed;
+            margin-top: 215px;
+            margin-left:405px;
+                color: #a9a9a9
+                margin-top:300px;
+
             }
 
 .error {
@@ -331,38 +349,78 @@ word-break: keep-all;
 }
 
             .login-btn {
- position: fixed;
-            margin-top: 300px;
-            margin-left: 200px;
+            position: fixed;
+            margin-top: 340px;
+            margin-left:390px;
                 display: block;
-                width: 100px;
-                padding: 20px;
+                width: 200px;
+                height:30px;
+                padding: auto;
                 font-size: 1rem;
-                font-weight: 600;
+                font-weight: 500;
                 text-align: center;
-                color: #ffffff;
-                background-color: #0d6efd;
-                border: 1px solid #0d6efd;
-                border-radius: 10px;
-                transition: background-color 0.3s;
-            }
+                color: 	#d3d3d3;
+                background-color: #ffffff;
+              border: 1px solid #dcdcdc;
+}
 
-            .btn-primary:hover {
-             margin-top: 35px;
-                background-color: #1e90ff;
-                border-color: #1e90ff;
+            .login-btn:hover {
+             box-shadow: 0px 2px 1px #d3d3d3;
+                  border: 2px solid #fff8e2;
+                 color:#c8e6e9;
             }
 
 
             .member {
+            position: fixed;
+          background-color:#ffffff;
+             width: 200px;
+             height: 150px;
+                margin-top:410px ;
+                 margin-left:776px;
+                 color:gray;
+            }
+            .member-text{
              position: fixed;
-                max-width: 9000px;
-
-                text-align: center ;
-                margin-top: 300px ;
+            margin-top:120px;
+              margin-left:140px;
+              text-decoration:none;
             }
 
+.member2 {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0);
+  width: 200px;
+  height: 150px;
+  margin-left: 777px;
+  margin-top: 419px;
+  overflow: hidden; /* 자식 요소가 overflow 되지 않도록 */
+  perspective: 1000px; /* 3D 효과를 위한 관찰 거리 */
+}
 
+.member2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  transform-origin: left center; /* 오른쪽 중앙에서 접히도록 설정 */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* 기본 사각형 모양 */
+  transform: rotateY(0deg); /* 초기 상태에서 평평하게 유지 */
+  transition: transform 0.7s ease, clip-path 0.7s ease;
+  z-index: 2;
+}
+
+.member2:hover::after {
+  transform: rotateY(90deg); /* 오른쪽에서 왼쪽으로 반 접히는 효과 */
+  clip-path: polygon(0 0, 100% 0, 50% 100%); /* 세모 모양으로 클리핑 */
+  background: #ffffff;
+  border-top: 3px solid #fff8e2;
+  border-left: 3px solid #c8e6e9;
+}
     </style>
 </head>
 
@@ -416,26 +474,17 @@ word-break: keep-all;
 
                 <form action="/members/login" role="form" method="post">
                     <div class="email-login">
-                        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="이메일">
-                        <label for="floatingInput">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#a9a9a9"
-                                 class="bi bi-person" viewBox="0 0 16 16">
-                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-                            </svg>
-                            이메일 입력
-                        </label>
+                        <input type="email" class="form-control" id="floatingInput" name="email">
                     </div>
+                    <div class="email-label">
+                     <img th:src="@{/css/images/logindeco.png}" height="20"> 이메일을 입력하세요 </div>
 
                     <div class="pw-login">
-                        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="비밀번호">
-                        <label for="floatingPassword">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="#a9a9a9"
-                                 class="bi bi-lock" viewBox="0 0 16 16">
-                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
-                            </svg>
-                            비밀번호 입력
-                        </label>
+                        <input type="password" class="form-control" id="floatingPassword" name="password">
                     </div>
+                    <div class="pw-label">
+                    <img th:src="@{/css/images/logindeco.png}" height="20"> 비밀번호를 입력하세요 </div>
+
 
                     <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
                     <button class="login-btn" type="submit">로그인</button>
@@ -443,9 +492,11 @@ word-break: keep-all;
                 </form>
 
 
+            <table class="member2">
             <div class="member">
-                <a href="/members/new" class="nav-link px-2">회원가입</a>
+                <a href="/members/new" class="member-text">회원가입</a>
             </div>
+            </table>
 
 
         </div>
