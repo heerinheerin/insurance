@@ -80,38 +80,52 @@
 <!--사용자 css 추가-->
 <th:block layout:fragment="css">
   <style>
-    .input-group {
-      margin-bottom: 15px;
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+    .main{
+      height: 10000px;
+
+    }
+        .main2 {
+            position: relative;
+            top: 230px;
+        }
+   .main2 p{
+    position: absolute;
+    font-size:35px;
+    margin-left:500px;
     }
 
-    .img-div {
-      margin-bottom: 10px;
+    .box{
+    position: absolute;
+   margin- top:500px;
     }
 
-    .fieldError {
-      color: #bd2130;
-    }
+
   </style>
 </th:block>
 <div layout:fragment="content">
-  <form role="form" class="container" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
-    <p class="h2">패키지 등록</p>
+  <div class="main">
+    <div class="main2">
+   <form role="form" class="container" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
+    <p>구직 등록</p>
+
 
     <input type="hidden" th:field="*{id}">
 
-    <div class="row mb-4">
+    <div class="box">
       <select th:field="*{itemSellStatus}" class="form-select">
-        <option value="SELL">예약가능</option>
+        <option value="SELL">지원가능</option>
         <option value="SOLD_OUT">마감</option>
       </select>
     </div>
-    <div class="row mb-4">
+
+    <div class="box">
       <select id="natureSelect" th:field="*{nature}" class="form-select">
         <option value="DOMESTIC">국내</option>
         <option value="OVERSEAS">해외</option>
       </select>
     </div>
-    <div class="row mb-4" id="regionSelectDiv">
+    <div class="box" id="regionSelectDiv">
       <span class="input-group-text">지역 선택</span>
       <select id="categorySelect" name="category" th:field="*{category}" class="form-select">
         <!-- Thymeleaf를 이용하여 옵션 동적 생성 -->
@@ -121,8 +135,8 @@
       </select>
     </div>
 
-    <div class="row mb-4">
-      <span class="input-group-text">출발지 선택</span>
+    <div class="box">
+      <span class="input-group-text">직무 선택</span>
       <select id="regionSelect" th:field="*{region}" class="form-select">
         <option value="Incheon">인천</option>
         <option value="Busan">부산</option>
@@ -139,6 +153,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text">패키지 등록</span>
       </div>
+
       <input type="text" th:field="*{itemNm}" class="form-control" placeholder="패키지명을 입력해주세요">
 
     </div>
@@ -160,17 +175,17 @@
 
     <div class="input-group">
       <div class="input-group-prepend">
-        <span class="input-group-text">출발 날짜</span>
+        <span class="input-group-text">구인시작 날짜</span>
       </div>
       <input type="date" th:field="*{startDate}" class="form-control" th:format="yyyy-MM-dd" id="startDate" min="2024-07-01" max="2050-12-31">
       <div id="startDateDisplay"></div>
     </div>
     <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="fieldError">Incorrect data</p>
 
-    <!-- 복귀 날짜 입력 필드 -->
+    <!-- 구인 날짜 입력 필드 -->
     <div class="input-group">
       <div class="input-group-prepend">
-        <span class="input-group-text">복귀 날짜</span>
+        <span class="input-group-text">구인마감 날짜</span>
       </div>
       <input type="date" th:field="*{endDate}" class="form-control" th:format="yyyy-MM-dd" id="endDate" min="2024-07-01" max="2050-12-31">
       <div id="endDateDisplay"></div>
@@ -214,5 +229,7 @@
     </div>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
   </form>
+    </div>
+  </div>
 </div>
 </html>
