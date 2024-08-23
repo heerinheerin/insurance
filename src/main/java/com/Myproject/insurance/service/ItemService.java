@@ -122,4 +122,8 @@ public class ItemService {
         int offset = nextPageLimit - limit;
         return itemRepository.findItemsByNature(Nature.OVERSEAS);
     }
+    @Transactional(readOnly = true)
+    public  Page<MainItemDto> searchItemPage(Pageable pageable, String search){
+        return itemRepository.searchItemPage(pageable, search);
+    }
 }

@@ -11,8 +11,7 @@ import lombok.Setter;
 public class MemberFormDto {
 
     private Long id; //코드
-    private String detailAddress; // 상세주소
-    private String postcode; // 우편번호
+
 
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String name;
@@ -24,8 +23,6 @@ public class MemberFormDto {
 
     private String password;
 
-    @NotEmpty(message = "주소는 필수 입력 값입니다.")
-    private String address;
 
     @NotBlank(message = "전화번호는 필수 입력 값입니다.")
     private String tel;

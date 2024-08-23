@@ -6,230 +6,328 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <th:block layout:fragment="script">
-  <script th:inline="javascript">
-    $(document).ready(function() {
-        var errorMessage = [[${errorMessage}]];
-        if (errorMessage != null) {
-            alert(errorMessage);
-        }
-        bindDomEvent();
-        $('#startDate').change(function() {
-            var startDate = new Date($(this).val());
-            $('#startDateDisplay').text("출발날짜 : " + startDate.getFullYear() + "년 " + (startDate.getMonth() + 1) + "월 " + startDate.getDate() + "일");
-        });
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            var errorMessage = [[${errorMessage}]];
+            if (errorMessage != null) {
+                alert(errorMessage);
+            }
+            bindDomEvent();
+            $('#startDate').change(function() {
+                var startDate = new Date($(this).val());
+                $('#startDateDisplay').text("시작날짜 : " + startDate.getFullYear() + "년 " + (startDate.getMonth() + 1) + "월 " + startDate.getDate() + "일");
+            });
 
-        $('#endDate').change(function() {
-            var endDate = new Date($(this).val());
-            $('#endDateDisplay').text("복귀날짜 : " + endDate.getFullYear() + "년 " + (endDate.getMonth() + 1) + "월 " + endDate.getDate() + "일");
-        });
+            $('#endDate').change(function() {
+                var endDate = new Date($(this).val());
+                $('#endDateDisplay').text("마감날짜 : " + endDate.getFullYear() + "년 " + (endDate.getMonth() + 1) + "월 " + endDate.getDate() + "일");
+            });
 
-        // 초기화: 국내 선택 시 국내 카테고리 옵션 보이기
-        updateCategoryOptions();
-
-        // natureSelect 변경 시 이벤트 처리
-        $('#natureSelect').change(function() {
+            // 초기화: 국내 선택 시 국내 카테고리 옵션 보이기
             updateCategoryOptions();
+
+            // natureSelect 변경 시 이벤트 처리
+            $('#natureSelect').change(function() {
+                updateCategoryOptions();
+            });
+
+            function updateCategoryOptions() {
+                var nature = $('#natureSelect').val();
+                var categorySelect = $('#categorySelect');
+
+                categorySelect.empty(); // 기존 옵션 제거
+
+                // 국내일 경우
+                if (nature === 'DOMESTIC') {
+                    categorySelect.append('<option value="INCHEON">인천</option>');
+                    categorySelect.append('<option value="BUSAN">부산</option>');
+                    categorySelect.append('<option value="YANGYANG">강원</option>');
+                    categorySelect.append('<option value="JEJU">제주</option>');
+                    categorySelect.append('<option value="SEOUL">서울</option>');
+                    categorySelect.append('<option value="DAEJEON">대전</option>');
+                }
+                // 해외일 경우
+                else if (nature === 'OVERSEAS') {
+                    categorySelect.append('<option value="HAWAII">하와이</option>');
+                    categorySelect.append('<option value="USA">미국</option>');
+                    categorySelect.append('<option value="PHILIPPINES">필리핀</option>');
+                    categorySelect.append('<option value="NHA_TRANG">나트랑</option>');
+                    categorySelect.append('<option value="KOTA_KINABALU">코타키나발루</option>');
+                    categorySelect.append('<option value="JAPAN">일본</option>');
+                }
+            }
         });
 
-        function updateCategoryOptions() {
-            var nature = $('#natureSelect').val();
-            var categorySelect = $('#categorySelect');
+        function bindDomEvent() {
+            $(".imageFile.form-control").on("change", function() {
+                // c:\\image\\a.jpg
+                //a.jpg
+                var fileName = $(this).val().split("\\").pop();
+                var fileExt = fileName.substring(fileName.lastIndexOf(".") + 1); //jpg
+                //확장자 추출
+                fileExt = fileExt.toLowerCase(); //소문자 소환 JPEG > jpeg
 
-            categorySelect.empty(); // 기존 옵션 제거
-
-            // 국내일 경우
-            if (nature === 'DOMESTIC') {
-                categorySelect.append('<option value="INCHEON">인천</option>');
-                categorySelect.append('<option value="BUSAN">부산</option>');
-                categorySelect.append('<option value="YANGYANG">양양</option>');
-                categorySelect.append('<option value="JEJU">제주</option>');
-                categorySelect.append('<option value="SEOUL">서울</option>');
-                categorySelect.append('<option value="DAEJEON">대전</option>');
-            }
-            // 해외일 경우
-            else if (nature === 'OVERSEAS') {
-                categorySelect.append('<option value="HAWAII">하와이</option>');
-                categorySelect.append('<option value="USA">미국</option>');
-                categorySelect.append('<option value="PHILIPPINES">필리핀</option>');
-                categorySelect.append('<option value="NHA_TRANG">나트랑</option>');
-                categorySelect.append('<option value="KOTA_KINABALU">코타키나발루</option>');
-                categorySelect.append('<option value="JAPAN">일본</option>');
-            }
+                if (fileExt != "jpg" && fileExt != "jpeg" && fileExt != "gif" &&
+                    fileExt != "png" && fileExt != "bmp") {
+                    alert("이미지 파일만 등록이 가능합니다.");
+                    $(this).val(""); //초기화 > 없애버림
+                    return
+                }
+            });
         }
-    });
-
-    function bindDomEvent() {
-        $(".imageFile.form-control").on("change", function() {
-            // c:\\image\\a.jpg
-            //a.jpg
-            var fileName = $(this).val().split("\\").pop();
-            var fileExt = fileName.substring(fileName.lastIndexOf(".") + 1); //jpg
-            //확장자 추출
-            fileExt = fileExt.toLowerCase(); //소문자 소환 JPEG > jpeg
-
-            if (fileExt != "jpg" && fileExt != "jpeg" && fileExt != "gif" &&
-                fileExt != "png" && fileExt != "bmp") {
-                alert("이미지 파일만 등록이 가능합니다.");
-                $(this).val(""); //초기화 > 없애버림
-                return
-            }
-        });
-    }
-  </script>
+    </script>
 </th:block>
 <!--사용자 css 추가-->
 <th:block layout:fragment="css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-    .main{
-      height: 10000px;
-
-    }
-        .main2 {
-            position: relative;
-            top: 230px;
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+        .main{
+          height: 10000px;
+           position: relative;
         }
-   .main2 p{
-    position: absolute;
-    font-size:35px;
-    margin-left:500px;
-    }
+            .main2 {
+                position: absolute;
+                top: 230px;
+            }
 
-    .box{
-    position: absolute;
-   margin- top:500px;
-    }
+       .main2 p{
+        white-space: nowrap; /* 줄 바꿈 방지 */
+        position: relative;
+        font-size:35px;
+        margin-left:890px;
+        margin-top:5px;
+        }
+
+    /*===========================================================*/
+
+        .box{
+        position: absolute;
+       margin-top:20px;
+          margin-left:500px;
+
+        }
+
+          .input-group-text{
+          width:200px;
+          height:50px;
+           align-items: center;
+        justify-content: center;
+          border-radius: 0; /* 모서리 둥글게 하기 없애기 */
+           background:#c8e6e9;
+          border:none;
+          margin-bottom:10px;
+          display: flex;
+         }
+
+        .form-select, .form-control {
+         text-align: center; /* 텍스트를 오른쪽 정렬 */
+    padding-right: 5px; /* 오른쪽 패딩 추가 (필요시 조정 가능) */
+          margin-left:20px;
+          margin-top:1px;
+          height:50px;
+          width:500px;
+          border: none; /* 상자 선 제거 */
+          border-bottom:1px solid #c8e6e9;
+          background: none; /* 배경 제거 */
+          border-radius: 0; /* 모서리 둥글게 하기 없애기 */
+          display: flex;
+          justify-content: center; /* 가운데 정렬 */
+          align-items: center; /* 수직 가운데 정렬 */
+        }
+
+        #endDateDisplay{
+          width:200px;
+           white-space: nowrap;
+        }
 
 
-  </style>
+    /*===========================================================*/
+
+          .box1{
+          display: flex;
+          }
+
+          .mb3{
+          background-color:#fff8e2;
+          padding-top:10px;
+          width:750px;
+            display: flex;
+          }
+
+          .btn1{
+    margin-left:300px;
+    margin-top:30px;
+    width:90px;
+    height:50px;
+           border:2px solid #c8e6e9;
+        background: none; /* 배경 제거 */
+         border-radius:10px;
+         color:grey;
+          }
+           .btn1:hover{
+           border:2px solid #fff8e2;
+          color:#a9a9a9;
+          }
+           .btn2{
+          margin-left:370px;
+    margin-top:30px;
+    width:90px;
+    height:50px;
+           border:2px solid #c8e6e9;
+        background: none; /* 배경 제거 */
+         border-radius:10px;
+          }
+           .btn2:hover{
+           border:2px solid #fff8e2;
+          color:#a9a9a9;
+          }
+
+
+
+
+    </style>
 </th:block>
 <div layout:fragment="content">
-  <div class="main">
-    <div class="main2">
-   <form role="form" class="container" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
-    <p>구직 등록</p>
+    <div class="main">
+        <div class="main2">
+            <form role="form" class="container" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
+                <p>구직 등록</p>
 
 
-    <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{id}">
 
-    <div class="box">
-      <select th:field="*{itemSellStatus}" class="form-select">
-        <option value="SELL">지원가능</option>
-        <option value="SOLD_OUT">마감</option>
-      </select>
-    </div>
+                <div class="box">
+                    <div class="box1">
+                       <span class="input-group-text">구직상태 선택</span>
+                        <select th:field="*{itemSellStatus}" class="form-select">
+                           <option value="SELL">지원가능</option>
+                            <option value="SOLD_OUT">마감</option>
+                        </select>
+                    </div>
 
-    <div class="box">
-      <select id="natureSelect" th:field="*{nature}" class="form-select">
-        <option value="DOMESTIC">국내</option>
-        <option value="OVERSEAS">해외</option>
-      </select>
-    </div>
-    <div class="box" id="regionSelectDiv">
-      <span class="input-group-text">지역 선택</span>
-      <select id="categorySelect" name="category" th:field="*{category}" class="form-select">
-        <!-- Thymeleaf를 이용하여 옵션 동적 생성 -->
-        <option th:each="category : ${T(com.Myproject.insurance.constant.Category).values()}"
-                th:value="${category.name()}"
-                th:text="${category.displayName}"></option>
-      </select>
-    </div>
+                    <div class="box1">
+                        <span class="input-group-text">국내/외 선택</span>
+                        <select id="natureSelect" th:field="*{nature}" class="form-select">
+                            <option value="DOMESTIC">국내</option>
+                            <option value="OVERSEAS">해외</option>
+                        </select>
+                    </div>
 
-    <div class="box">
-      <span class="input-group-text">직무 선택</span>
-      <select id="regionSelect" th:field="*{region}" class="form-select">
-        <option value="Incheon">인천</option>
-        <option value="Busan">부산</option>
-        <option value="Deagu">대구</option>
-        <option value="Chungju">충주</option>
-        <option value="Gwangju">광주</option>
-        <option value="Yangyang">양양</option>
-        <option value="Jeju">제주도</option>
+                    <div class="box1" id="regionSelectDiv">
+                        <span class="input-group-text">지역 선택</span>
+                        <select id="categorySelect" name="category" th:field="*{category}" class="form-select">
+                            <!-- Thymeleaf를 이용하여 옵션 동적 생성 -->
+                            <option th:each="category : ${T(com.Myproject.insurance.constant.Category).values()}"
+                                    th:value="${category.name()}"
+                                    th:text="${category.displayName}"></option>
+                        </select>
+                    </div>
 
-      </select>
-    </div>
+                    <div class="box1">
+                        <span class="input-group-text">직무 선택</span>
+                        <select id="regionSelect" th:field="*{region}" class="form-select">
+                            <option value="Incheon">기획·전략</option>
+                            <option value="Busan">고객상담·TM</option>
+                            <option value="Deagu">금융·보험</option>
+                            <option value="Chungju">마케팅·광고·MD</option>
+                            <option value="Gwangju">개발·데이터·디자인</option>
+                            <option value="Yangyang">영업</option>
+                            <option value="Jeju">교육</option>
+                        </select>
+                    </div>
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">패키지 등록</span>
-      </div>
 
-      <input type="text" th:field="*{itemNm}" class="form-control" placeholder="패키지명을 입력해주세요">
+                    <div class="box1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">상호 명</span>
+                        </div>
+                        <input type="text" th:field="*{itemNm}" class="form-control" placeholder="상호 명을 입력해주세요">
+                    </div>
+                    <p th:if="${#fields.hasErrors('itemNm')}" th:errors="*{itemNm}" class="fieldError">Incorrect data</p>
 
-    </div>
-    <p th:if="${#fields.hasErrors('itemNm')}" th:errors="*{itemNm}" class="fieldError">Incorrect data</p>
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">가격</span>
-      </div>
-      <input type="number" th:field="*{price}" class="form-control" placeholder="상품의 가격을 입력해주세요.">
-    </div>
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">인원</span>
-      </div>
-      <input type="text" th:field="*{stockNumber}" class="form-control" placeholder="최대 여행 인원을 입력해주세요.">
-    </div>
+                    <div class="box1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">급여</span>
+                        </div>
+                        <input type="number" th:field="*{price}" class="form-control" placeholder="급여를 입력해주세요.">
+                    </div>
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">구인시작 날짜</span>
-      </div>
-      <input type="date" th:field="*{startDate}" class="form-control" th:format="yyyy-MM-dd" id="startDate" min="2024-07-01" max="2050-12-31">
-      <div id="startDateDisplay"></div>
-    </div>
-    <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="fieldError">Incorrect data</p>
+                    <div class="box1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">구인 인원</span>
+                        </div>
+                        <input type="text" th:field="*{stockNumber}" class="form-control" placeholder="구인 인원을 입력해주세요.">
+                    </div>
 
-    <!-- 구인 날짜 입력 필드 -->
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">구인마감 날짜</span>
-      </div>
-      <input type="date" th:field="*{endDate}" class="form-control" th:format="yyyy-MM-dd" id="endDate" min="2024-07-01" max="2050-12-31">
-      <div id="endDateDisplay"></div>
+                    <div class="box1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">구인시작 날짜</span>
+                        </div>
+                        <input type="date" th:field="*{startDate}" class="form-control" th:format="yyyy-MM-dd" id="startDate" min="2024-07-01" max="2050-12-31">
+                        <div id="startDateDisplay"></div>
+                    </div>
+                    <p th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="fieldError">Incorrect data</p>
 
-    </div>
-    <p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}" class="fieldError">Incorrect data</p>
+                    <!-- 구인 날짜 입력 필드 -->
+                    <div class="box1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">구인마감 날짜</span>
+                        </div>
+                        <input type="date" th:field="*{endDate}" class="form-control" th:format="yyyy-MM-dd" id="endDate" min="2024-07-01" max="2050-12-31">
+                        <div id="endDateDisplay"></div>
 
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">상품 상세 내용</span>
-      </div>
-      <textarea class="form-control" aria-label="With textarea" th:field="*{itemDetail}"></textarea>
-    </div>
-    <p th:if="${#fields.hasErrors('itemDetail')}" th:errors="*{itemDetail}" class="fieldError">Incorrect data</p>
+                    </div>
+                    <p th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}" class="fieldError">Incorrect data</p>
 
-    <div th:if="${#lists.isEmpty(itemFormDto.itemImgDtoList)}">
-      <div class="row" th:each="num: ${#numbers.sequence(1,10)}">
-        <div class="input-group mb3">
-          <label class="image input-group-text" th:text="상품이미지 + ${num}"></label>
-          <input type="file" class="imageFile form-control" name="itemImgFile">
-        </div>
-      </div>
-    </div>
+                    <div class="box1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">구인 상세내용</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" th:field="*{itemDetail}"></textarea>
+                    </div>
+                    <p th:if="${#fields.hasErrors('itemDetail')}" th:errors="*{itemDetail}" class="fieldError">Incorrect data</p>
 
-    <div th:if="${not #lists.isEmpty(itemFormDto.itemImgDtoList)}">
-      <div class="row" th:each="itemImgDto, status: ${itemFormDto.itemImgDtoList}">
-        <div class="input-group mb3">
-          <label class="image input-group-text" th:text="${not #strings.isEmpty(itemImgDto.oriImgName)} ?
+
+
+                    <div th:if="${#lists.isEmpty(itemFormDto.itemImgDtoList)}">
+                        <div class="row" th:each="num: ${#numbers.sequence(1,10)}">
+
+                            <div class="mb3">
+                                <label class="image input-group-text" th:text="상품이미지 + ${num}"></label>
+                                <input type="file" class="imageFile form-control" name="itemImgFile">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div th:if="${not #lists.isEmpty(itemFormDto.itemImgDtoList)}">
+                        <div class="row" th:each="itemImgDto, status: ${itemFormDto.itemImgDtoList}">
+
+                            <div class="input-group mb3">
+                                <label class="image input-group-text" th:text="${not #strings.isEmpty(itemImgDto.oriImgName)} ?
                     ${itemImgDto.oriImgName} : '상품이미지'+${status.index+1}"></label>
-          <input type="file" class="imageFile form-control" name="itemImgFile">
-          <input type="hidden" name="itemImgIds" th:value="${itemImgDto.id}">
-        </div>
-      </div>
-    </div>
+                                <input type="file" class="imageFile" name="itemImgFile">
+                                <input type="hidden"  name="itemImgIds" th:value="${itemImgDto.id}">
+                            </div>
+                        </div>
+                    </div>
 
-    <div th:if="${#strings.isEmpty(itemFormDto.id)}" style="text-align:center">
-      <button th:formaction="@{/admin/item/new}" type="submit" class="btn btn-primary">저장</button>
+                    <div th:if="${#strings.isEmpty(itemFormDto.id)}">
+                        <button th:formaction="@{/admin/item/new}" type="submit" class="btn1">저장</button>
+                    </div>
+                    <div th:unless="${#strings.isEmpty(itemFormDto.id)}">
+                        <button th:formaction="@{'/admin/item/'+${itemFormDto.id}}" type="submit" class="btn2">수정</button>
+                    </div>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                </div>
+
+
+            </form>
+
+        </div>
     </div>
-    <div th:unless="${#strings.isEmpty(itemFormDto.id)}" style="text-align:center">
-      <button th:formaction="@{'/admin/item/'+${itemFormDto.id}}" type="submit" class="btn btn-primary">수정</button>
-    </div>
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-  </form>
-    </div>
-  </div>
 </div>
 </html>

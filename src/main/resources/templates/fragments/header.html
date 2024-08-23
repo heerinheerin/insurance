@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 
 <header th:fragment="header">
 
@@ -151,7 +151,7 @@
             }
 
             .dropdown:hover .dropdown-menu {
-            margin-top:25px;
+            margin-top:22px;
             margin-left:-30px;
                 display: block; /* 마우스를 올렸을 때 표시 */
             }
@@ -181,7 +181,7 @@ z-index: 100000;
             width:3000px;
             left:-370px;
             font-size: 15px;
-            top: 25px; /* 적절한 위치 */
+            top: 27px; /* 적절한 위치 */
             border-bottom: 1px solid #eeeeee;
             background-color: rgb(255 255 255 / 70%);
             box-shadow: 0 1px 30px rgba(240, 237, 233, 0.596);
@@ -283,6 +283,19 @@ margin-left:-45px;
             }
 
         </style>
+        <script>
+
+
+            function searchBtn(){
+               console.log("page")
+
+                var searchText= $('#Search').val();
+                console.log(searchText)
+              location.href="/items/searchText/" + searchText;
+            };
+
+
+        </script>
     </head>
     <body>
     <div class="header">
@@ -300,10 +313,11 @@ margin-left:-45px;
     <a class="logo4" href="/">
         <img th:src="@{/css/images/logo4.png}" height="59">
     </a>
-    <form class="search-box" action="" method="get">
-        <input class="search-txt" type="text" name="" placeholder="검색어를 입력하세요.">
-        <button class="search-btn" type="submit"> <img th:src="@{/css/images/search.png}" height="45"> </button>
-        </div>  </form>
+    <form class="search-box">
+        <input class="search-txt" type="text" name="" id="Search" placeholder="검색어를 입력하세요.">
+        <button class="search-btn" type="button" onclick="searchBtn()"> <img th:src="@{/css/images/search.png}" height="45"> </button>
+        </form>
+
 
     <div class="dropdown">
         <button class="btn btn-link dropdown-toggle nav-link px-2" type="button" aria-expanded="false">

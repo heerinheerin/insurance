@@ -22,17 +22,17 @@ public class ItemFormDto {
     private Long id;
 
 
-    @NotBlank(message = "패키지명은 필수 입력 값입니다.")
+    @NotBlank(message = "상호 명은 필수 입력 값입니다.")
     private String itemNm;
 
-    @NotNull(message = "가격은 필수 입력 값입니다.")
+    @NotNull(message = "급여는 필수 입력 값입니다.")
     private Integer price;
 
     @NotBlank(message = "상세설명은 필수 입력 값입니다.")
     private String itemDetail;
 // 인원 수
 
-    @NotNull(message = "마감인원은 필수 입력 값입니다.")
+    @NotNull(message = "인원은 필수 입력 값입니다.")
     private Integer stockNumber;
 
     private ItemSellStatus itemSellStatus;
@@ -43,10 +43,10 @@ public class ItemFormDto {
 
     private Region region;
 
-    @NotNull(message = "출발날짜는 필수 입력 값입니다.")
+    @NotNull(message = "시작날짜는 필수 입력 값입니다.")
     private LocalDate startDate;
 
-    @NotNull(message = "도착날짜는 필수 입력 값입니다.")
+    @NotNull(message = "마감날짜는 필수 입력 값입니다.")
     private LocalDate endDate;
     // -------------------------------------------------------
     // ItemImg

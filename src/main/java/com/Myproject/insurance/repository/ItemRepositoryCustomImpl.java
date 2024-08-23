@@ -1,5 +1,6 @@
 package com.Myproject.insurance.repository;
 
+
 import com.Myproject.insurance.dto.QMainItemDto;
 import com.Myproject.insurance.entity.QItem;
 import com.Myproject.insurance.entity.QItemImg;
@@ -116,6 +117,36 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         List<MainItemDto> content = results.getResults();
         long total = results.getTotal();
         return new PageImpl<>(content,pageable,total);
+    }
+    private BooleanExpression searchStatus( String search){
+
+        return QItem.item.itemNm.like("%"+ search + "%");
+    }
+
+    private BooleanExpression searchDetailStatus( String search){
+
+        return QItem.item.itemDetail.like("%"+ search + "%");
+    }
+
+    public Page<MainItemDto> searchItemPage(Pageable pageable, String search) {
+       QItem item =QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+
+        QueryResults<MainItemDto> results = queryFactory
+                .select(new QMainItemDto(item.id,item.itemNm,
+                        item.itemDetail,itemImg.imgUrl,item.price,item.nature,item.startDate,item.endDate))
+                .from(itemImg).join(itemImg.item, item)
+                .where(itemImg.reqImgYn.eq("Y"))
+                .where(searchStatus(search))
+                .where(searchDetailStatus(search))
+                .orderBy(item.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<MainItemDto> content = results.getResults();
+        long total = results.getTotal();
+        return new PageImpl<>(content, pageable, total);
     }
 
 }

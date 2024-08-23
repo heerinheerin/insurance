@@ -304,9 +304,9 @@
             </div>
         </div>
         <div class="wd50">
-            <span th:if="${item.itemSellStatus == T(com.trip.constant.ItemSellStatus).SELL}"
+            <span th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
                   class="badge bg-primary mgb-15">판매중</span>
-            <span th:unless="${item.itemSellStatus == T(com.trip.constant.ItemSellStatus).SELL}"
+            <span th:unless="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
                   class="badge bg-primary mgb-15">마감</span>
             <div class="h4" th:text="${item.itemNm}"></div>
             <hr class="my-4">
@@ -328,12 +328,12 @@
                 <h5>결제 금액</h5>
                 <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
             </div>
-            <div th:if="${item.itemSellStatus == T(com.trip.constant.ItemSellStatus).SELL}" class="text-right">
+            <div th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}" class="text-right">
                 <button type="button" class="btn btn-light border border-primary btn-lg" onclick="addCart()">찜♡</button>
                 <button type="button" class="btn btn-primary btn-lg" onclick="order()">예약하기</button>
             </div>
 
-            <div th:unless="${item.itemSellStatus == T(com.trip.constant.ItemSellStatus).SELL}"
+            <div th:unless="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
                  class="text-right">
                 <button type="button" class="btn btn-danger btn-lg">마감</button>
 
@@ -431,7 +431,7 @@
             </div>
         </div>
     </div>
-    <div th:if="${member.Role == T(com.trip.constant.Role).ADMIN}">
+    <div th:if="${member.Role == T(com.Myproject.insurance.constant.Role).ADMIN}">
         <button type="button" onclick="update()">수정하기</button>
     </div>
 </div>

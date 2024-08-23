@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JEJOB</title>
 
-    <link rel="stylesheet" href="../assets/css/slider.css">
-    <link rel="stylesheet" href="../assets/css/deracula.css">
 
     <style>
         /* slider */
@@ -20,12 +18,12 @@
         .main2 {
             position: relative;
             z-index: 4;
-            top: 105px;
+            top: 100px;
             width: 100%;
-             background-color: rgb(255 255 255 / 70%);
-            height: 585px;
+             background-color:rgb(255 255 255 / 70%);
+            box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+            height: 640px;
             border-bottom: 1px solid #eeeeee;
-             box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
         }
 
         .slider__wrap {
@@ -36,16 +34,14 @@
             align-items: center;
             justify-content: center;
             overflow: hidden; /* 오버플로우 숨기기 */
+
         }
 
         .slider__img {
-         top: -50px;
+            top: -10px;
             position: relative;
             width: 800px;
-            height: 500px;
-             box-shadow:
-        0 -5px 10px rgba(128, 128, 128, 0.6), /* 위쪽 그림자 */
-        0 5px 10px rgba(128, 128, 128, 0.5);  /* 아래쪽 그림자 */
+            height: 515px;
         }
 
         .slider__inner {
@@ -62,6 +58,18 @@
             position: relative;
             width: 800px;
             height: 550px;
+            transition: transform 0.5s ease; /* 입체감 추가 */
+               filter: brightness(80%); /* 기본 슬라이드는 어두운 효과 추가 */
+        }
+
+        .slider.active {
+        width: 800px;
+            height: 500px;
+        margin-top:0px;
+            transform: scale(1.05); /* 중앙 이미지 확대 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
+            z-index: 10; /* 가운데 이미지를 가장 위로 설정 */
+              filter: brightness(100%); /* 활성화된 슬라이드는 밝은 효과 추가 */
         }
 
         .slider span {
@@ -73,52 +81,171 @@
             padding: 5px 10px;
         }
 
-        @media(max-width: 1000px) {
-            .slider__img {
+        .slider__btn button {
+            position: absolute;
+            top: 45%;
+            width: 50px;
+            height: 50px;
+            transition: all 0.2s;
+            display: block;
+            color: #000;
+            pointer-events: auto;
+            border: none;
+            cursor: pointer;
+              background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+        }
 
+        .slider__btn button:hover {
+border-radius: 50px;
+            background-color:rgb(255 255 255 / 70%);
+            box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+        }
+
+        .slider__btn button.prev {
+       z-index:10;
+                   left: 450px;
+        }
+
+        .slider__btn button.next {
+         z-index:10;
+            right: 450px;
+        }
+
+   .svg1, .svg2 {
+    margin-left: 0px;
+    width: 25px;
+    color:#ffffff;
+}
+.svg1:hover, .svg2:hover {
+    color: 	#434343;
+}
+/*=======================================슬라이더=============================================*/
+.image-all{
+ position: absolute;
+ margin-bottom:100px;
+  top: 935px;
+ width: 100%;
+ height:1000px;
+ background:#fff8e2;
+}
+
+.container {
+ margin-left:150px;
+  height:1000px;
+   width: 5000px;
+margin-top:100px;
+}
+
+.container2 {
+    display: flex;
+    align-items: center; /* 이미지 세로 중앙 정렬 */
+    justify-content: space-between; /* 좌우로 균등하게 배치 */
+    margin-top: 126px;
+    margin-left: -200px;
+    width: 100%;
+    background: #fff8e2;
+    border-bottom: 1px solid #ffffff;
+    box-shadow: 0 1px 30px rgba(240, 237, 233, 0.8);
+    position: relative; /* 상대 위치로 변경 */
+}
+
+.container2 img {
+width: auto;
+    height: 140px;
+    margin-left:0px;
+}
+#imageType01 {
+    display: flex;
+    gap: 30px; /* 이미지 사이의 간격 설정 */
+}
+
+
+.image {
+border: 1px solid #eeeeee;
+border-radius:20px;
+ background-color: rgb(255 255 255 / 90%);
+box-shadow: 0 1px 30px rgba(240, 237, 233, 0.8);
+ width: 300px;
+   height: 400px;
+    position: relative;
+    overflow: hidden;   /* 영역 밖 요소 숨기기 */
+    box-sizing: border-box; /* 패딩과 보더를 너비에 포함시키기 */
+}
+
+.image__box img {
+   width: 100%; /* 이미지가 컨테이너를 채우도록 설정 */
+    height: 100%;
+    object-fit: cover; /* 이미지 비율 유지하며 채우기 */
+    transition: all 0.6s ease-in-out; /* 확대 효과 전환 설정 */
+}
+
+
+.image__desc {
+    box-sizing: border-box;
+    width: 100%;
+    height: 270px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: -150px;
+border-top: 1px solid #ffffff;
+ background-color: rgb(255 255 255 / 70%);
+box-shadow: 0 1px 30px rgba(240, 237, 233, 0.8);
+    backdrop-filter: blur(5px); /* 배경에 그래픽 효과 설정 : 블러 효과 */
+    transition: all 0.3s ease-in-out; /* 이동 효과 설정 */
+}
+
+.image:hover .image__desc {
+    bottom: 0; /* 커서를 갖다 대었을 때 desc가 위로 올라오도록 설정 */
+}
+
+.image:hover .image__box img {
+    transform: scale(1.05); /* 이미지를 확대 시키기 */
+}
+
+        /* desc 색상 */
+        .img1 .image__desc {
+        background-color: rgb(255 255 255 / 60%);
+        }
+        .img1 .image__desc .image__title {
+            color: rgba(60, 32, 0);
+        }
+         .img1 .image__desc .more {
+            color: rgba(60, 32, 0);
+        }
+        .image__desc .more {
+            font-size: 16px;
+        }
+        .image__desc .more:hover {
+            text-decoration: underline; /* 커서가 닿으면 밑줄 생기게 하기 */
+        }
+
+/*====================================================================================*/
+
+
+
+          @media (max-width: 1000px) {
+            .slider__img {
                 width: 400px;
                 height: 250px;
             }
 
             .slider {
-             top:-125px;
+                top: -125px;
                 width: 400px;
                 height: 250px;
             }
-        }
-
-        .slider__btn.disable {
-            pointer-events: none;
-        }
-
-        .slider__btn button {
-            position: absolute;
-            top: 40%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.4);
-            text-align: center;
-            line-height: 50px;
-            transition: all 0.2s;
-            display: block;
-            color: #fff;
-            pointer-events: auto;
-            border: 0;
-            cursor: pointer;
-        }
-
-        .slider__btn button:hover {
-            border-radius: 50px;
-            background: rgba(38, 52, 103, 0.4);
-        }
-
-        .slider__btn button.prev {
-        left:10px;
+              .slider__btn button.prev {
+       z-index:10;
+                   left: 50px;
         }
 
         .slider__btn button.next {
-            right: 10px;
+         z-index:10;
+            right: 5px;
+        }
+
         }
     </style>
 </head>
@@ -158,88 +285,130 @@
                     </div>
 
                     <div class="slider__btn">
-                        <button class="prev" role="button" aria-label="왼쪽 이미지">prev</button>
-                        <button class="next" role="button" aria-label="오른쪽 이미지">next</button>
+                        <button class="prev" role="button" aria-label="왼쪽 이미지"> <svg xmlns="http://www.w3.org/2000/svg" class="svg1" viewBox="0 0 16 16">
+                            <path stroke="currentColor" stroke-width="1" fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                        </svg> </button>
+                        <button class="next" role="button" aria-label="오른쪽 이미지"> <svg xmlns="http://www.w3.org/2000/svg" class="svg2" viewBox="0 0 16 16">
+                            <path stroke="currentColor" stroke-width="1" fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                        </svg> </button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container2">
+            <img class="bn1" th:src="@{/css/images/bn.png}">
+            <img th:src="@{/css/images/mainbn.gif}">
+            <img class="bn2" th:src="@{/css/images/bn.png}">
 
-        <script>
-            const sliderWrap = document.querySelector(".slider__wrap");
-   const sliderInner = document.querySelector(".slider__inner");
-   const sliders = document.querySelectorAll(".slider");
-   const sliderBtnPrev = document.querySelector(".slider__btn .prev");
-   const sliderBtnNext = document.querySelector(".slider__btn .next");
-
-   let currentIndex = 1, // 시작 인덱스를 1로 설정 (클론을 제외한 첫 번째 슬라이드)
-       sliderLength = sliders.length - 2, // 클론을 제외한 슬라이드 개수
-       sliderWidth = sliders[0].offsetWidth;
-
-   let interval = 2000; // 슬라이드 전환 시간
-   let sliderTimer;
-
-   function init() {
-       sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 초기 위치 설정
-       autoPlay(); // 자동 플레이 시작
-   }
-
-   function autoPlay() {
-       sliderTimer = setInterval(() => {
-           gotoSlider(currentIndex + 1);
-       }, interval);
-   }
-
-   function stopPlay() {
-       clearInterval(sliderTimer);
-   }
-
-   function gotoSlider(index) {
-       if (index > sliderLength) {
-           // 마지막 슬라이드에서 오른쪽으로 넘어가면 클론 첫 번째 슬라이드로 이동
-           sliderInner.style.transition = "none"; // 전환 효과 제거
-           currentIndex = 1; // 첫 번째 슬라이드로 이동
-           sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 위치 초기화
-           requestAnimationFrame(() => {
-               sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
-               currentIndex++; // 다음 인덱스
-               sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 부드럽게 첫 번째 슬라이드로 이동
-           });
-       } else if (index < 0) {
-           // 첫 번째 슬라이드에서 왼쪽으로 넘어가면 클론 마지막 슬라이드로 이동
-           sliderInner.style.transition = "none"; // 전환 효과 제거
-           currentIndex = sliderLength; // 마지막 슬라이드로 이동
-           sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 위치 초기화
-           requestAnimationFrame(() => {
-               sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
-               currentIndex--; // 이전 인덱스
-               sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 부드럽게 마지막 슬라이드로 이동
-           });
-       } else {
-           currentIndex = index; // 현재 인덱스 업데이트
-           sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 위치 조정
-       }
-   }
-
-   sliderBtnPrev.addEventListener("click", () => {
-       gotoSlider(currentIndex - 1);
-   });
-
-   sliderBtnNext.addEventListener("click", () => {
-       gotoSlider(currentIndex + 1);
-   });
-
-   // 슬라이더에 마우스가 올라가면 자동 재생 중지
-   sliderWrap.addEventListener("mouseover", stopPlay);
-   // 슬라이더에서 마우스가 나가면 자동 재생 재개
-   sliderWrap.addEventListener("mouseout", autoPlay);
-
-   init(); // 초기화 호출
-
-
-
-        </script>
+        </div>
+        <div class="image-all">
+        <div class="container">
+            <section id="imageType01">
+                <th:block th:each="item: ${items.getContent()}">
+                    <div class="">
+                        <article class="image img1">
+                            <div th:if="${item.nature == T(com.Myproject.insurance.constant.Nature).DOMESTIC}">
+                                <figure class="image__box">
+                                    <a th:href="'/item/' + ${item.id}" class="text-dark">
+                                        <img th:src="${item.imgUrl}" class="card-img-top" th:alt="${item.itemNm}">
+                                    </a>
+                                </figure>
+                            </div>
+                            <div class="image__desc">
+                                <h3 class="image__title">[[${item.itemNm}]]</h3> <!--상품명-->
+                                <h3 class="image__title">[[${item.price}]]원</h3> <!--가격-->
+                            </div>
+                        </article>
+                    </div>
+                </th:block>
+            </section>
+            <a href="#" title="자세히 보기" class="more"> top </a>
+        </div>
+</div>
     </table>
+
+    <script>
+        const sliderWrap = document.querySelector(".slider__wrap");
+ const sliderInner = document.querySelector(".slider__inner");
+ const sliders = document.querySelectorAll(".slider");
+ const sliderBtnPrev = document.querySelector(".slider__btn .prev");
+ const sliderBtnNext = document.querySelector(".slider__btn .next");
+
+ let currentIndex = 1; // 시작 인덱스를 1로 설정 (클론을 제외한 첫 번째 슬라이드)
+ let sliderLength = sliders.length - 2; // 클론을 제외한 슬라이드 개수
+ let sliderWidth = sliders[0].offsetWidth;
+
+ let interval = 2000; // 슬라이드 전환 시간
+ let sliderTimer;
+
+ function init() {
+     sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 초기 위치 설정
+     updateActiveSlider(); // 초기 활성 슬라이더 설정
+     autoPlay(); // 자동 플레이 시작
+ }
+
+ function autoPlay() {
+     sliderTimer = setInterval(() => {
+         gotoSlider(currentIndex + 1);
+     }, interval);
+ }
+
+ function stopPlay() {
+     clearInterval(sliderTimer);
+ }
+
+ function updateActiveSlider() {
+     sliders.forEach((slider, index) => {
+         slider.classList.remove("active");
+         if (index === currentIndex) {
+             slider.classList.add("active");
+         }
+     });
+ }
+
+ function gotoSlider(index) {
+     if (index > sliderLength) {
+         sliderInner.style.transition = "none"; // 전환 효과 제거
+         currentIndex = 1; // 첫 번째 슬라이드로 이동
+         sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 위치 초기화
+         requestAnimationFrame(() => {
+             sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
+             currentIndex++;
+             sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 부드럽게 첫 번째 슬라이드로 이동
+             updateActiveSlider(); // 중간 슬라이더 업데이트
+         });
+     } else if (index < 0) {
+         sliderInner.style.transition = "none"; // 전환 효과 제거
+         currentIndex = sliderLength; // 마지막 슬라이드로 이동
+         sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 위치 초기화
+         requestAnimationFrame(() => {
+             sliderInner.style.transition = "left 0.5s ease"; // 전환 재설정
+             currentIndex--;
+             sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 부드럽게 마지막 슬라이드로 이동
+             updateActiveSlider(); // 중간 슬라이더 업데이트
+         });
+     } else {
+         currentIndex = index; // 현재 인덱스 업데이트
+         sliderInner.style.left = -sliderWidth * currentIndex + "px"; // 위치 조정
+         updateActiveSlider(); // 중간 슬라이더 업데이트
+     }
+ }
+
+ sliderBtnPrev.addEventListener("click", () => {
+     gotoSlider(currentIndex - 1);
+ });
+
+ sliderBtnNext.addEventListener("click", () => {
+     gotoSlider(currentIndex + 1);
+ });
+
+ // 슬라이더에 마우스가 올라가면 자동 재생 중지
+ sliderWrap.addEventListener("mouseover", stopPlay);
+ // 슬라이더에서 마우스가 나가면 자동 재생 재개
+ sliderWrap.addEventListener("mouseout", autoPlay);
+
+ init(); // 초기화 호출
+    </script>
 </div>
 </body>
 </html>
