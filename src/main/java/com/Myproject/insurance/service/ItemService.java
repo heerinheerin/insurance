@@ -107,8 +107,19 @@ public class ItemService {
 
         return orderItem;
 
-
     }
+
+    public Item itemNm(String itemNm){
+
+        List<Item> items = itemRepository.findByItemNm(itemNm);
+        System.out.println("아이템 서비스에서 보는 아이템 링크" + items.getFirst().getItemLink());
+        Item item = items.getFirst();
+
+        return item;
+    }
+
+
+
     public void deleteItems(List<Long> itemIds) {
         for (Long itemId : itemIds) {
             itemRepository.deleteById(itemId);
@@ -125,5 +136,10 @@ public class ItemService {
     @Transactional(readOnly = true)
     public  Page<MainItemDto> searchItemPage(Pageable pageable, String search){
         return itemRepository.searchItemPage(pageable, search);
+    }
+    public  void deleteItemId(Long ItemId){
+        System.out.println("aaaaaaaaaaaaaaaa1111111111111111111");
+        itemRepository.deleteById(ItemId);
+        System.out.println("aaaaaaaaaaaaaaaa22222222222222222222222");
     }
 }

@@ -245,7 +245,10 @@
                     </div>
                     <p th:if="${#fields.hasErrors('itemNm')}" th:errors="*{itemNm}" class="fieldError">Incorrect data</p>
 
-
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">링크</span>
+                    </div>
+                    <input type="text" th:field="*{itemLink}" class="form-control" placeholder="링크 명을 입력해주세요">
 
                     <div class="box1">
                         <div class="input-group-prepend">
