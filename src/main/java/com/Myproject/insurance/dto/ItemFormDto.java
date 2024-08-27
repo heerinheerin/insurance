@@ -8,6 +8,7 @@ import com.Myproject.insurance.constant.Region;
 import com.Myproject.insurance.entity.Item;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
-
+@Data
 public class ItemFormDto {
     private Long id;
 
@@ -27,8 +28,9 @@ public class ItemFormDto {
 
     private String itemLink;
 
-    @NotNull(message = "급여는 필수 입력 값입니다.")
-    private Integer price;
+    private Integer price;   // 0 -> 회사내규 이 외는 숫자 연봉 저장
+
+    private  String test;
 
     @NotBlank(message = "상세설명은 필수 입력 값입니다.")
     private String itemDetail;

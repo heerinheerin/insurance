@@ -18,7 +18,6 @@ public class ItemImg extends BaseEntity {
     @Column(name = "item_img_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String imgName;
     private String oriImgName;
     private String imgUrl;

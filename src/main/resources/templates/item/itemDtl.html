@@ -4,23 +4,14 @@
 <head>
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-    <!-- Slick Carousel CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css">
+
 </head>
 
 <th:block layout:fragment="script">
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
     <script th:inline="javascript">
         $(document).ready(function () {
-            // Slick Carousel 초기화
-            $('.slider').slick({
-                infinite: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: true,
-                prevArrow: '<div class="slick-arrows"><button type="button" class="slick-arrow slick-prev"> < </button></div>',
-                nextArrow: '<div class="slick-arrows"><button type="button" class="slick-arrow slick-next"> > </button></div>'
+
             });
         });
 
@@ -131,7 +122,7 @@
 
         function update() {
             var itemId = $('#itemId').val();
-            location.href = '/admin/item/update/' + itemId;
+            location.href = '/admin/item/' + itemId;
         }
 
       function deleteItem() {
@@ -192,86 +183,147 @@
 <th:block layout:fragment="css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: #ffffff;
         }
 
         .box1 {
-        width: 1600px;
-        height:1000px;
-        align-items: center;
+text-align:center;
+        position:absolute;
+        background-color: #ffffff;
         }
 
-        .Imgdiv {
-            margin-top: 300px;
-            margin-right: 20px;
+.talk{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ border: 1px solid #ffffff;
+ border-radius:10px;
+text-align:center;
+            margin-top:350px;
+            margin-left: 200px;
+            margin-right: 310px;
+            height: 400px;
+            width: 800px;
+}
+/* ====================================================================== */
+@keyframes borderDraw {
+  0% {
+    width: 0; /* 초기 상태: 왼쪽에서부터 시작 */
+    clip-path: inset(0 100% 0 0);
+  }
+  50% {
+   border: 5px solid #c8e6e9;
+    width:10%;
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    width: 100%; /* 애니메이션 끝: 전체 폭으로 확장 */
+    clip-path: inset(0 0 0 0); /* 애니메이션 끝: 전체가 보이도록 */
+  }
+}
+
+/* .name-box 스타일 */
+.name-box {
+  position: relative;
+  width: 500px;
+  height: 100px;
+  margin-top: 20px;
+  margin-left: 140px;
+  border: 5px solid transparent; /* 초기 상태: 투명한 border */
+  border-radius: 50px;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 50% 50%, 0 55%);
+  overflow: hidden; /* 가상 요소가 박스 밖으로 넘치지 않도록 */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4); /* 그림자 추가 */
+}
+
+/* 애니메이션용 가상 요소 */
+.name-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0; /* 초기 너비: 0 */
+  height: 100%;
+  border: 5px solid #fff8e2; /* border 색상 */
+  border-radius: 50px;
+  box-sizing: border-box;
+  animation: borderDraw 1.5s ease-out forwards; /* 애니메이션 적용 */
+}
+
+@keyframes fadeInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px); /* 애니메이션 시작 위치 */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* 애니메이션 종료 위치 */
+  }
+}
+.name{
+position:absolute;
+ font-size: 45px;
+   margin-top:-95px;
+      margin-left:280px;
+      animation: fadeInFromLeft 1s ease-out; /* 애니메이션 적용 */
+}
+/* ==================================제목 애니메이션==================================== */
+.price{
+   justify-content: center; /* .price 내부의 내용을 수평으로 가운데 정렬 */
+    align-items: center; /* .price 내부의 내용을 수직으로 가운데 정렬 */
+display:flex;
+}
+#formattedPrice{
+padding:5px;
+margin-top:-17px;
+}
+.link-bt{
+top:10px;
+width:200px;
+ border: 2px solid #c8e6e9;
+background:none;
+}
+.link-bt:hover{
+box-shadow: 0px 2px 1px #d3d3d3;
+                  border: 2px solid #fff8e2;
+                 color:#c8e6e9;
+}
+#formattedPrice{
+color:	#e06666;
+}
+.jiwon-btn{
+margin-top:30px;
+}
+
+
+
+
+        .imgbox{
+        z-index:0;
+         position:absolute;
+            margin-top:5px;
+            margin-left: -365px;
+            height:800px;
+            width:800px;
+        }
+
+        .imgbox2{
+        margin-top: 380px;
+            margin-left: 480px;
             height: auto;
-            width: 50%;
+            width: 300px;
         }
 
-        .repImg {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .last{
+          margin-top: 400px;
         }
 
-        .wd50 {
-            width: 50%;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
 
-        .mgb-15 {
-            margin-bottom: 15px;
-        }
 
-        .mgt-30 {
-            margin-top: 30px;
-        }
 
-        .mgt-50 {
-            margin-top: 50px;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        .button-container {
-            position: relative;
-            z-index: 10;
-        }
-
-        button {
-            position: relative;
-            z-index: 15;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            color: #fff;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
+        .btn1, .btn2{
+        top:300px;
+width:200px;
+ border: 2px solid #c8e6e9;
+background:none;
         }
 
         .important-notes {
@@ -288,79 +340,63 @@
             font-weight: bold;
         }
 
-        .h4 {
-            font-size: 1.5rem;
-            margin: 0;
-        }
 
-        hr.my-4 {
-            border: 0;
-            border-top: 1px solid #e9ecef;
-            margin: 1.5rem 0;
-        }
-
-        .lead {
-            font-size: 1.25rem;
-        }
     </style>
 </th:block>
-
+<body>
 <div layout:fragment="content" style="margin: 0 auto; max-width: 1200px; padding: 20px;">
-    <input type="hidden" id="itemId" th:value="${item.id}">
-
     <div class="box1">
-        <div class="Imgdiv">
-            <div th:each="itemImg, stat : ${item.itemImgDtoList}"
-                 th:if="${stat.index == 0}">
-                <img th:src="${itemImg.imgUrl}" class="rounded repImg" th:alt="${item.itemNm}">
-            </div>
-        </div>
-        <div class="wd50">
-            <span th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
-                  class="badge bg-primary mgb-15">구인중</span>
-            <span th:unless="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
-                  class="badge bg-secondary mgb-15">마감</span>
-            <div class="h4" th:text="${item.itemNm}"></div>
-            <hr class="my-4">
-            <div class="text-right">
-                <div class="h4 text-danger text-left">
-                    <input type="hidden" th:value="${item.price}" id="price" name="price">
-                    <span th:text="${item.price}" id="formattedPrice"></span>원
-                </div>
-                <div class="input-group w-50">
-                    <!-- Additional input fields can go here -->
-                </div>
-            </div>
-            <hr class="my-4">
 
-            <div class="text-right mgt-50">
-                <!-- Additional content can go here -->
+        <div class="talk">
+            <div class="name-box"></div>
+            <div class="name" th:text="${item.itemNm}"></div>
+            <input type="hidden" id="itemId" th:value="${item.id}">
+            <div class="">
+            <p class="lead" th:text="${item.itemDetail}"></p>
+                <div class="price">
+                    <input type="hidden" th:value="${item.price}" id="price" name="price">
+                    <p>급여 : </p> <span th:text="${item.test}" id="formattedPrice"></span>
+                </div>
+                <h6 class="image__title">등록일:[[${item.startDate}]]</h6>
+                <h6 class="image__title">마감일:[[${item.endDate}]]</h6>
             </div>
             <input type="hidden" id="itemNm" th:value="${item.itemNm}">
-            <div th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}" class="text-right">
-                <button type="button" class="btn btn-primary btn-lg" onclick="jiwon()">홈페이지 지원하기</button>
-            </div>
-
-            <div th:unless="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
-                 class="text-right">
-                <button type="button" class="btn btn-danger btn-lg">마감</button>
+            <div th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}" class="jiwon-btn">
+                <button type="button" class="link-bt" onclick="jiwon()">홈페이지 지원</button>
             </div>
         </div>
+
+
+        <img th:src="${item.itemImgDtoList[0].imgUrl}" class="imgbox" th:alt="${item.itemNm}">
+
+
+
+        <!-- <span th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
+               class="badge1">구인중</span>
+         <span th:unless="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
+               class="badge bg-secondary mgb-15">마감</span>-->
+
+
+        <div class="imgbox2">
+            <img th:src="${item.itemImgDtoList[1].imgUrl}" class="rounded repImg" th:alt="${item.itemNm}">
+        </div>
+        <div th:unless="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
+             class="text-right">
+            <button type="button" class="btn btn-danger btn-lg">마감</button>
+        </div>
+
     </div>
 
 
-    <div class="mgt-30">
-        <div class="container">
-            <p class="lead" th:text="${item.itemDetail}"></p>
-            <hr class="my-4">
-        </div>
-        <div class="important-notes">
-            <p><strong>마감일은 기업의 사정으로 인해 조기 마감 또는 변경될 수 있습니다.</strong></p>
-        </div>
-    </div>
+
+    <p class="last"> 마감일은 기업의 사정으로 인해 조기 마감 또는 변경될 수 있습니다.</p>
+
+
     <div th:if="${member.Role == T(com.Myproject.insurance.constant.Role).ADMIN}">
-        <button type="button" class="btn btn-primary" onclick="update()">수정하기</button>
-        <button type="button" class="btn btn-danger" onclick="deleteItem()">삭제하기</button>
+        <button type="button" class="btn1" onclick="update()">수정하기</button>
+        <button type="button" class="btn2" onclick="deleteItem()">삭제하기</button>
     </div>
 </div>
+</div>
+</body>
 </html>
