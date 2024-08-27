@@ -183,22 +183,29 @@
 <th:block layout:fragment="css">
     <style>
         body {
-            background-color: #ffffff;
+            background-color:#f8f9fa;
         }
 
         .box1 {
+         background-color: rgb(255 255 255 / 70%);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
 text-align:center;
+ width: 1500px;
+  height:2000px;
         position:absolute;
-        background-color: #ffffff;
+          margin-left: -160px;
         }
 
 .talk{
+  background-color: rgb(255 255 255 / 70%);
+                backdrop-filter: blur(10px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- border: 1px solid #ffffff;
+ border: 2px solid 	#f3f3f3;
  border-radius:10px;
 text-align:center;
-            margin-top:350px;
-            margin-left: 200px;
+            margin-top:-30px;
+            margin-left: 350px;
             margin-right: 310px;
             height: 400px;
             width: 800px;
@@ -210,8 +217,13 @@ text-align:center;
     clip-path: inset(0 100% 0 0);
   }
   50% {
-   border: 5px solid #c8e6e9;
-    width:10%;
+   border: 5px solid #fff8e2;
+    width:100%;
+    clip-path: inset(0 100% 0 0);
+  }
+    80% {
+   border: 5px solid #fbeab3;
+    width:100%;
     clip-path: inset(0 100% 0 0);
   }
   100% {
@@ -225,11 +237,11 @@ text-align:center;
   position: relative;
   width: 500px;
   height: 100px;
-  margin-top: 20px;
-  margin-left: 140px;
-  border: 5px solid transparent; /* 초기 상태: 투명한 border */
-  border-radius: 50px;
-  clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 50% 50%, 0 55%);
+  margin-top: 250px;
+  margin-left: 500px;
+  border: 5px solid #f8f9fa; /* 초기 상태: 투명한 border */
+  border-radius: 30px;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 50%, 50% 60%, 0 70%);
   overflow: hidden; /* 가상 요소가 박스 밖으로 넘치지 않도록 */
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4); /* 그림자 추가 */
 }
@@ -242,8 +254,8 @@ text-align:center;
   left: 0;
   width: 0; /* 초기 너비: 0 */
   height: 100%;
-  border: 5px solid #fff8e2; /* border 색상 */
-  border-radius: 50px;
+  border: 5px solid #c8e6e9; /* border 색상 */
+  border-radius: 30px;
   box-sizing: border-box;
   animation: borderDraw 1.5s ease-out forwards; /* 애니메이션 적용 */
 }
@@ -260,12 +272,17 @@ text-align:center;
 }
 .name{
 position:absolute;
- font-size: 45px;
-   margin-top:-95px;
-      margin-left:280px;
+ font-size: 40px;
+   margin-top:-90px;
+      margin-left:640px;
       animation: fadeInFromLeft 1s ease-out; /* 애니메이션 적용 */
 }
 /* ==================================제목 애니메이션==================================== */
+.lead{
+margin-top:50px;
+ font-size: 25px;
+}
+
 .price{
    justify-content: center; /* .price 내부의 내용을 수평으로 가운데 정렬 */
     align-items: center; /* .price 내부의 내용을 수직으로 가운데 정렬 */
@@ -346,10 +363,9 @@ background:none;
 <body>
 <div layout:fragment="content" style="margin: 0 auto; max-width: 1200px; padding: 20px;">
     <div class="box1">
-
+        <div class="name-box"></div>
+        <div class="name" th:text="${item.itemNm}"></div>
         <div class="talk">
-            <div class="name-box"></div>
-            <div class="name" th:text="${item.itemNm}"></div>
             <input type="hidden" id="itemId" th:value="${item.id}">
             <div class="">
             <p class="lead" th:text="${item.itemDetail}"></p>
