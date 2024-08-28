@@ -11,40 +11,41 @@
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
     <script th:inline="javascript">
         $(document).ready(function () {
-
-            });
+            console.log('Document ready');
         });
 
         function jiwon() {
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
+            console.log('jiwon 함수 호출됨');
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
 
-    var url = "/jiwon";
-    var itemNm = $("#itemNm").val();  // Thymeleaf에서 전달된 itemNm 값
+            var url = "/jiwon";
+            var itemNm = $("#itemNm").val();
 
-    $.ajax({
-        url: url,
-        type: "POST",
-        contentType: "application/json",  // JSON 형식으로 데이터 전송
-        data: JSON.stringify({ itemName: itemNm }),
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader(header, token);  // CSRF 헤더 설정
-        },
-        success: function (result) {
-            if (result.link) {
-                window.open(result.link, '_blank');  // 새 창에서 링크 열기
-            } else {
-                alert('No link found in the response');
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log('Error:', textStatus, errorThrown);
-            alert('An error occurred while processing the request');
+            $.ajax({
+                url: url,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ itemName: itemNm }),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success: function (result) {
+                    if (result.link) {
+                        window.open(result.link, '_blank');
+                    } else {
+                        alert('No link found in the response');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('Error:', textStatus, errorThrown);
+                    alert('An error occurred while processing the request');
+                }
+            });
         }
-    });
-}
 
         function order() {
+            console.log('order 함수 호출됨');
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
 
@@ -56,33 +57,11 @@
 
             var param = JSON.stringify(paramData);
 
-            $.ajax({
-                url: url,
-                type: "POST",
-                contentType: "application/json",
-                data: param,
-                beforeSend: function (xhr) {
-                    // 데이터 전송하기 전에 헤더에 csrf 값을 설정
-                    xhr.setRequestHeader(header, token);
-                },
-                dataType: "json",
-                cache: false,
-                success: function (result, status) {
-                    alert("결제를 진행합니다..");
-                    location.href = '/payment/' + result.message;
-                },
-                error: function (jqXHR, status, error) {
-                    if (jqXHR.status == '401') {
-                        alert('로그인 후 이용해주세요');
-                        location.href = '/members/login';
-                    } else {
-                        alert(jqXHR.responseText);
-                    }
-                }
-            });
+
         }
 
         function addCart() {
+            console.log('addCart 함수 호출됨');
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
 
@@ -100,7 +79,6 @@
                 contentType: "application/json",
                 data: param,
                 beforeSend: function (xhr) {
-                    // 데이터 전송하기 전에 헤더에 csrf 값을 설정
                     xhr.setRequestHeader(header, token);
                 },
                 dataType: "json",
@@ -121,48 +99,48 @@
         }
 
         function update() {
+            console.log('update 함수 호출됨');
             var itemId = $('#itemId').val();
             location.href = '/admin/item/' + itemId;
         }
 
-      function deleteItem() {
-    var itemId = $('#itemId').val();
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
+        function deleteItem() {
+            console.log('deleteItem 함수 호출됨');
+            var itemId = $('#itemId').val();
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
 
-    var url = "/admin/item/delete/" + itemId;
-    // 전송할 데이터가 필요없는 경우 아래 두 줄 삭제 가능
-    var paramData = {
-        itemId: itemId
-    };
+            var url = "/admin/item/delete/" + itemId;
+            var paramData = {
+                itemId: itemId
+            };
 
-    var param = JSON.stringify(paramData);
+            var param = JSON.stringify(paramData);
 
-    $.ajax({
-        url: url,
-        type: "DELETE",
-        contentType: "application/json",
-        data: param,
-        beforeSend: function (xhr) {
-            // 데이터 전송하기 전에 헤더에 csrf 값을 설정
-            xhr.setRequestHeader(header, token);
-        },
-        dataType: "json",
-        cache: false,
-        success: function (result, status) {
-            alert("삭제 완료!");
-            location.href = '/';
-        },
-        error: function (jqXHR, status, error) {
-            if (jqXHR.status == '401') {
-                alert('로그인 후 이용해주세요.');
-                location.href = '/members/login';
-            } else {
-                alert("삭제 실패: " + jqXHR.responseText);
-            }
+            $.ajax({
+                url: url,
+                type: "DELETE",
+                contentType: "application/json",
+                data: param,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                dataType: "json",
+                cache: false,
+                success: function (result, status) {
+                    alert("삭제 완료!");
+                    location.href = '/';
+                },
+                error: function (jqXHR, status, error) {
+                    if (jqXHR.status == '401') {
+                        alert('로그인 후 이용해주세요.');
+                        location.href = '/members/login';
+                    } else {
+                        alert("삭제 실패: " + jqXHR.responseText);
+                    }
+                }
+            });
         }
-    });
-}
 
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -183,6 +161,7 @@
 <th:block layout:fragment="css">
     <style>
         body {
+          height:100%;
             background-color:#f8f9fa;
         }
 
@@ -192,33 +171,68 @@
                 box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
 text-align:center;
  width: 1500px;
-  height:2000px;
+  height:715PX;
         position:absolute;
           margin-left: -160px;
         }
 
-.talk{
-  background-color: rgb(255 255 255 / 70%);
-                backdrop-filter: blur(10px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- border: 2px solid 	#f3f3f3;
- border-radius:10px;
-text-align:center;
-            margin-top:-30px;
-            margin-left: 350px;
-            margin-right: 310px;
-            height: 400px;
-            width: 800px;
-}
-/* ====================================================================== */
+
+
+
+
 @keyframes borderDraw {
   0% {
-    width: 0; /* 초기 상태: 왼쪽에서부터 시작 */
-    clip-path: inset(0 100% 0 0);
+    width: 100%;
+    clip-path: inset(0 0 0 100%);
   }
   50% {
    border: 5px solid #fff8e2;
     width:100%;
+    clip-path: inset(0 0 0 100%);
+  }
+    80% {
+   border: 5px solid #fbeab3;
+    width:0%;
+    clip-path: inset(0 0 0 100%);
+  }
+  100% {
+    width: 0%;
+    clip-path: inset(0 0 0 100%); /* 애니메이션 끝: 전체가 보이도록 */
+  }
+}
+.talk{
+  position: relative;
+  width: 500px;
+  height: 200px;
+  margin-top:-170px;
+  margin-left: 500px;
+  border: 5px solid #f8f9fa; /* 초기 상태: 투명한 border */
+  border-radius: 30px;
+  clip-path: polygon(0 30%, 100% 30%, 100% 100%, 0% 100%, 0% 0%, 0 0%);
+  overflow: hidden; /* 가상 요소가 박스 밖으로 넘치지 않도록 */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+.talk::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0; /* 초기 너비: 0 */
+  height: 100%;
+  border: 3px solid #c8e6e9; /* border 색상 */
+  border-radius: 30px;
+  box-sizing: border-box;
+  animation: borderDraw 1.5s ease-out forwards; /* 애니메이션 적용 */
+}
+/* ====================================================================== */
+@keyframes borderDraw {
+  0% {
+    width: 0%;
+    clip-path: inset(0 100% 0 0);
+  }
+  50% {
+   border: 5px solid #fff8e2;
+    width:0%;
     clip-path: inset(0 100% 0 0);
   }
     80% {
@@ -227,7 +241,7 @@ text-align:center;
     clip-path: inset(0 100% 0 0);
   }
   100% {
-    width: 100%; /* 애니메이션 끝: 전체 폭으로 확장 */
+    width: 100%;
     clip-path: inset(0 0 0 0); /* 애니메이션 끝: 전체가 보이도록 */
   }
 }
@@ -237,7 +251,7 @@ text-align:center;
   position: relative;
   width: 500px;
   height: 100px;
-  margin-top: 250px;
+  margin-top: 270px;
   margin-left: 500px;
   border: 5px solid #f8f9fa; /* 초기 상태: 투명한 border */
   border-radius: 30px;
@@ -254,10 +268,10 @@ text-align:center;
   left: 0;
   width: 0; /* 초기 너비: 0 */
   height: 100%;
-  border: 5px solid #c8e6e9; /* border 색상 */
+  border: 3px solid #c8e6e9; /* border 색상 */
   border-radius: 30px;
   box-sizing: border-box;
-  animation: borderDraw 1.5s ease-out forwards; /* 애니메이션 적용 */
+  animation: borderDraw 1s ease-out forwards; /* 애니메이션 적용 */
 }
 
 @keyframes fadeInFromLeft {
@@ -273,13 +287,12 @@ text-align:center;
 .name{
 position:absolute;
  font-size: 40px;
-   margin-top:-90px;
-      margin-left:640px;
-      animation: fadeInFromLeft 1s ease-out; /* 애니메이션 적용 */
+   margin-top:-70px;
+      margin-left:650px;
+      animation: fadeInFromLeft 1s; /* 애니메이션 적용 */
 }
-/* ==================================제목 애니메이션==================================== */
 .lead{
-margin-top:50px;
+margin-top:-15px;
  font-size: 25px;
 }
 
@@ -307,55 +320,105 @@ box-shadow: 0px 2px 1px #d3d3d3;
 color:	#e06666;
 }
 .jiwon-btn{
+ position: relative; /* 위치를 상대값으로 지정 */
+    z-index: 2; /* z-index를 높여서 다른 요소들 위로 보이게 함 */
 margin-top:30px;
 }
+      .last{
 
-
-
-
-        .imgbox{
-        z-index:0;
-         position:absolute;
-            margin-top:5px;
-            margin-left: -365px;
-            height:800px;
-            width:800px;
+          margin-top: 10px;
+          color:	#808080;
+          font-size:13px;
         }
 
-        .imgbox2{
-        margin-top: 380px;
-            margin-left: 480px;
-            height: auto;
-            width: 300px;
+ /*===================================여기까지 윗 박스========================================*/
+
+/* 애니메이션을 정의합니다. */
+@keyframes slideDown {
+    from {
+        transform: translateY(-15%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 애니메이션을 적용할 요소에 설정합니다. */
+.box2 {
+    background-color: rgba(255, 255, 255, 0.7); /* RGBA 색상으로 투명도 조정 */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+    text-align: center;
+    width: 1500px;
+    height: 2500px; /* px로 변경 */
+    position: relative;
+    margin-top: 725px;
+    margin-left: -160px;
+    animation: slideDown 1s ease-out; /* 애니메이션 적용 */
+}
+
+.imgbox {
+    box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+    border-left: 3px solid #c8e6e9;
+    border-right: 3px solid #c8e6e9;
+    border-top: 3px solid #c8e6e9;
+    border-radius: 5px;
+    z-index: 1;
+    position: absolute;
+    margin-top: 0;
+    margin-left: -390px;
+    height: 800px;
+    width: 800px;
+}
+
+.imgbox2 {
+    box-shadow: 0 1px 15px rgba(240, 237, 233, 0.5);
+    border-left: 3px solid #c8e6e9;
+    border-right: 3px solid #c8e6e9;
+    border-bottom: 3px solid #c8e6e9;
+    border-radius: 5px;
+    position: absolute;
+    margin-top: 795px;
+    margin-left: -390px;
+    height: 1500px;
+    width: 800px;
+}
+
+.box2-text {
+    position: absolute;
+    z-index: 2;
+    margin-left: 700px;
+    margin-top: 70px;
+    color: #808080;
+    font-size: 33px;
+}
+
+        .btn1{
+        position:absolute;
+        top:2350px;
+        left:560px;
+width:150px;
+height:50px;
+ border: 2px solid #c8e6e9;
+ border-radius:5px;
+background:none;
         }
-
-        .last{
-          margin-top: 400px;
-        }
-
-
-
-
-        .btn1, .btn2{
-        top:300px;
-width:200px;
+        .btn2{
+        position:absolute;
+      top:2350px;
+width:150px;
+height:50px;
+ border-radius:5px;
  border: 2px solid #c8e6e9;
 background:none;
         }
-
-        .important-notes {
-            text-align: left;
-            margin-top: 20px;
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .highlight {
-            color: red;
-            font-weight: bold;
-        }
+         .btn1:hover,  .btn2:hover{
+         box-shadow: 0px 2px 1px #d3d3d3;
+                  border: 2px solid #fff8e2;
+                 color:#c8e6e9;
+         }
 
 
     </style>
@@ -363,55 +426,44 @@ background:none;
 <body>
 <div layout:fragment="content" style="margin: 0 auto; max-width: 1200px; padding: 20px;">
     <div class="box1">
+          <!--     <span th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
+                     class="badge1">구인중</span>
+        <span th:unless="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
+              class="badge1">마감</span> -->
+
         <div class="name-box"></div>
         <div class="name" th:text="${item.itemNm}"></div>
+        <p class="lead" th:text="${item.itemDetail}"></p>
+        <div class="price">
+            <input type="hidden" th:value="${item.price}" id="price" name="price">
+            <p>급여 : </p> <span th:text="${item.test}" id="formattedPrice"></span>
+        </div>
+
+        <input type="hidden" id="itemId" th:value="${item.id}">
+        <h6 class="image__title">등록일:[[${item.startDate}]]</h6>
+        <h6 class="image__title">마감일:[[${item.endDate}]]</h6>
+        <input type="hidden" id="itemNm" th:value="${item.itemNm}">
+        <div th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}" class="jiwon-btn">
+            <button type="button" class="link-bt" onclick="jiwon()">홈페이지 지원</button>
+        </div>
         <div class="talk">
-            <input type="hidden" id="itemId" th:value="${item.id}">
-            <div class="">
-            <p class="lead" th:text="${item.itemDetail}"></p>
-                <div class="price">
-                    <input type="hidden" th:value="${item.price}" id="price" name="price">
-                    <p>급여 : </p> <span th:text="${item.test}" id="formattedPrice"></span>
-                </div>
-                <h6 class="image__title">등록일:[[${item.startDate}]]</h6>
-                <h6 class="image__title">마감일:[[${item.endDate}]]</h6>
-            </div>
-            <input type="hidden" id="itemNm" th:value="${item.itemNm}">
-            <div th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}" class="jiwon-btn">
-                <button type="button" class="link-bt" onclick="jiwon()">홈페이지 지원</button>
-            </div>
         </div>
-
-
-        <img th:src="${item.itemImgDtoList[0].imgUrl}" class="imgbox" th:alt="${item.itemNm}">
-
-
-
-        <!-- <span th:if="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
-               class="badge1">구인중</span>
-         <span th:unless="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
-               class="badge bg-secondary mgb-15">마감</span>-->
-
-
-        <div class="imgbox2">
-            <img th:src="${item.itemImgDtoList[1].imgUrl}" class="rounded repImg" th:alt="${item.itemNm}">
-        </div>
-        <div th:unless="${item.itemSellStatus == T(com.Myproject.insurance.constant.ItemSellStatus).SELL}"
-             class="text-right">
-            <button type="button" class="btn btn-danger btn-lg">마감</button>
-        </div>
-
+        <p class="last"> 마감일은 기업의 사정으로 인해 조기 마감 또는 변경될 수 있습니다.</p>
     </div>
 
 
 
-    <p class="last"> 마감일은 기업의 사정으로 인해 조기 마감 또는 변경될 수 있습니다.</p>
+    <div class="box2">
+<p class="box2-text">상세요강</p>
+       <img th:src="${item.itemImgDtoList[0].imgUrl}" class="imgbox" th:alt="${item.itemNm}">
+       <img th:src="${item.itemImgDtoList[1].imgUrl}" class="imgbox2" th:alt="${item.itemNm}">
 
-
-    <div th:if="${member.Role == T(com.Myproject.insurance.constant.Role).ADMIN}">
-        <button type="button" class="btn1" onclick="update()">수정하기</button>
-        <button type="button" class="btn2" onclick="deleteItem()">삭제하기</button>
+        <div th:if="${member.Role == T(com.Myproject.insurance.constant.Role).ADMIN}">
+            <button type="button" class="btn1" onclick="update()">수정하기</button>
+            <button type="button" class="btn2" onclick="deleteItem()">삭제하기</button>
+        </div>
     </div>
+
 </div>
 </div>
 </body>

@@ -67,6 +67,9 @@ public class Item extends BaseEntity {
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ItemImg> itemImgs; // itemImg 엔티티와의 일대다 관계
+
+
+    @Column(columnDefinition = "TEXT")
     private String itemLink;
 
     public void updateItem(ItemFormDto itemFormDto){

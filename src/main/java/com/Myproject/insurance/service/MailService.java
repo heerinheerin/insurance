@@ -22,7 +22,7 @@ public class MailService {
         MimeMessage message = emailSender.createMimeMessage();
 
         message.addRecipients(Message.RecipientType.TO, to);//보내는 대상
-        message.setSubject("더조은투어 회원 가입 인증코드"); //제목
+        message.setSubject("JOEN JOB 회원가입 인증코드"); //제목
 
         String msgg="";
         msgg = "<div style='margin: 20px; padding: 20px; border: 2px solid #87CEEB; border-radius: 10px; background-color: #E0F7FA;'>";
@@ -43,7 +43,7 @@ public class MailService {
 
 
         message.setText(msgg, "utf-8","html"); //내용
-        message.setFrom(new InternetAddress("z9096@naver.com","더조은투어")); //properties에 입력한 이메일
+        message.setFrom(new InternetAddress("z9096@naver.com","JOEN JOB")); //properties에 입력한 이메일
 
 
         return message;
